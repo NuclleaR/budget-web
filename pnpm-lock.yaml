@@ -1,11 +1,15 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@parse/react': 0.0.1-alpha.18
   '@types/react': ^18.0.26
   '@types/react-dom': ^18.0.9
   '@vitejs/plugin-react-swc': ^3.0.0
   autoprefixer: ^10.4.13
+  parse: ^3.5.1
   postcss: ^8.4.21
+  prettier: ^2.8.2
+  prettier-plugin-tailwindcss: ^0.2.1
   react: ^18.2.0
   react-dom: ^18.2.0
   tailwindcss: ^3.2.4
@@ -13,6 +17,8 @@ specifiers:
   vite: ^4.0.0
 
 dependencies:
+  '@parse/react': 0.0.1-alpha.18
+  parse: 3.5.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
@@ -22,11 +28,28 @@ devDependencies:
   '@vitejs/plugin-react-swc': 3.0.1_vite@4.0.4
   autoprefixer: 10.4.13_postcss@8.4.21
   postcss: 8.4.21
+  prettier: 2.8.2
+  prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.2
   tailwindcss: 3.2.4_postcss@8.4.21
   typescript: 4.9.4
   vite: 4.0.4
 
 packages:
+
+  /@babel/runtime-corejs3/7.17.8:
+    resolution: {integrity: sha512-ZbYSUvoSF6dXZmMl/CYTMOvzIFnbGfv4W3SEHYgMvNsFTeLaF2gkGAF4K2ddmtSK4Emej+0aYcnSC6N5dPCXUQ==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      core-js-pure: 3.27.1
+      regenerator-runtime: 0.13.11
+    dev: false
+
+  /@babel/runtime/7.18.0:
+    resolution: {integrity: sha512-YMQvx/6nKEaucl0MY56mwIG483xk8SDNdlUwb2Ts6FUpr7fm85DxEmsY18LXBNhcTz6tO6JwZV8w1W06v8UKeg==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.13.11
+    dev: false
 
   /@esbuild/android-arm/0.16.16:
     resolution: {integrity: sha512-BUuWMlt4WSXod1HSl7aGK8fJOsi+Tab/M0IDK1V1/GstzoOpqc/v3DqmN8MkuapPKQ9Br1WtLAN4uEgWR8x64A==}
@@ -246,6 +269,18 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@parse/react-base/0.0.1-alpha.18:
+    resolution: {integrity: sha512-4I4/+WfaZYahcQabi/8LKJXPoFPZpgTjPMwFdOxnIhD/30VlVbFZAjIcaYpjOSzD521TMbC9zOsZb+IeRtb8sg==}
+    dependencies:
+      tslib: 2.3.1
+    dev: false
+
+  /@parse/react/0.0.1-alpha.18:
+    resolution: {integrity: sha512-d+GigQ2TTsIyjqtBakVlwOGuAXAAR3J0QaeRsSmwuYQ6ImWOP6pPSfom7iWxeuz7zD4nv76nRrDL5VI/IIezeQ==}
+    dependencies:
+      '@parse/react-base': 0.0.1-alpha.18
+    dev: false
 
   /@swc/core-darwin-arm64/1.3.25:
     resolution: {integrity: sha512-8PWAVcjTJyj2VrqPBFOIi2w2P0Z8kOCbzHW3+pe+bSXxfGMG0MKPl5U2IXhsEL0ovm4xSFlqW0yygpoP3MmRPw==}
@@ -483,6 +518,17 @@ packages:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
     dev: true
 
+  /core-js-pure/3.27.1:
+    resolution: {integrity: sha512-BS2NHgwwUppfeoqOXqi08mUqS5FiZpuRuJJpKsaME7kJz0xxuk0xkhDdfMIlP/zLa80krBqss1LtD7f889heAw==}
+    requiresBuild: true
+    dev: false
+
+  /crypto-js/4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /cssesc/3.0.0:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
@@ -615,6 +661,12 @@ packages:
       function-bind: 1.1.1
     dev: true
 
+  /idb-keyval/6.0.3:
+    resolution: {integrity: sha512-yh8V7CnE6EQMu9YDwQXhRxwZh4nv+8xm/HV4ZqK4IiYFJBWYGjJuykADJbSP+F/GDXUBwCSSNn/14IpGL81TuA==}
+    dependencies:
+      safari-14-idb-fix: 3.0.0
+    dev: false
+
   /is-binary-path/2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
     engines: {node: '>=8'}
@@ -702,6 +754,23 @@ packages:
     resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
     engines: {node: '>= 6'}
     dev: true
+
+  /parse/3.5.1:
+    resolution: {integrity: sha512-uxkLVNfbqgZ/pStg/jIQGh09tOUkPZorzDIqz9vSFjZ3iIZzgvNk6VBbjXjcMWsR8LyFPOR1ROR6/y9Dedn3/w==}
+    dependencies:
+      '@babel/runtime': 7.18.0
+      '@babel/runtime-corejs3': 7.17.8
+      idb-keyval: 6.0.3
+      react-native-crypto-js: 1.0.0
+      uuid: 3.4.0
+      ws: 8.6.0
+      xmlhttprequest: 1.8.0
+    optionalDependencies:
+      crypto-js: 4.1.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: false
 
   /path-parse/1.0.7:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
@@ -791,6 +860,21 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
+  /prettier-plugin-tailwindcss/0.2.1_prettier@2.8.2:
+    resolution: {integrity: sha512-aIO8IguumORyRsmT+E7JfJ3A9FEoyhqZR7Au7TBOege3VZkgMvHJMkufeYp4zjnDK2iq4ktkvGMNOQR9T8lisQ==}
+    engines: {node: '>=12.17.0'}
+    peerDependencies:
+      prettier: '>=2.2.0'
+    dependencies:
+      prettier: 2.8.2
+    dev: true
+
+  /prettier/2.8.2:
+    resolution: {integrity: sha512-BtRV9BcncDyI2tsuS19zzhzoxD8Dh8LiCx7j7tHzrkz8GFXAexeWFdi22mjE1d16dftH2qNaytVxqiRTGlMfpw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
@@ -808,6 +892,10 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-native-crypto-js/1.0.0:
+    resolution: {integrity: sha512-FNbLuG/HAdapQoybeZSoes1PWdOj0w242gb+e1R0hicf3Gyj/Mf8M9NaED2AnXVOX01b2FXomwUiw1xP1K+8sA==}
     dev: false
 
   /react/18.2.0:
@@ -829,6 +917,10 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
+
+  /regenerator-runtime/0.13.11:
+    resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
+    dev: false
 
   /resolve/1.22.1:
     resolution: {integrity: sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==}
@@ -857,6 +949,10 @@ packages:
     dependencies:
       queue-microtask: 1.2.3
     dev: true
+
+  /safari-14-idb-fix/3.0.0:
+    resolution: {integrity: sha512-eBNFLob4PMq8JA1dGyFn6G97q3/WzNtFK4RnzT1fnLq+9RyrGknzYiM/9B12MnKAxuj1IXr7UKYtTNtjyKMBog==}
+    dev: false
 
   /scheduler/0.23.0:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
@@ -915,6 +1011,10 @@ packages:
       is-number: 7.0.0
     dev: true
 
+  /tslib/2.3.1:
+    resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
+    dev: false
+
   /typescript/4.9.4:
     resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
     engines: {node: '>=4.2.0'}
@@ -935,6 +1035,12 @@ packages:
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /uuid/3.4.0:
+    resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
+    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+    hasBin: true
+    dev: false
 
   /vite/4.0.4:
     resolution: {integrity: sha512-xevPU7M8FU0i/80DMR+YhgrzR5KS2ORy1B4xcX/cXLsvnUWvfHuqMmVU6N0YiJ4JWGRJJsLCgjEzKjG9/GKoSw==}
@@ -968,6 +1074,24 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /ws/8.6.0:
+    resolution: {integrity: sha512-AzmM3aH3gk0aX7/rZLYvjdvZooofDu3fFOzGqcSnQ1tOcTWwhM/o+q++E8mAyVVIyUdajrkzWUGftaVSDLn1bw==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false
+
+  /xmlhttprequest/1.8.0:
+    resolution: {integrity: sha512-58Im/U0mlVBLM38NdZjHyhuMtCqa61469k2YP/AaPbvCoV9aQGUpbJBj1QRm2ytRiVQBD/fsw7L2bJGDVQswBA==}
+    engines: {node: '>=0.4.0'}
+    dev: false
 
   /xtend/4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
