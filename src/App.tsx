@@ -1,20 +1,21 @@
-import Parse from "parse/dist/parse.min.js";
-import { useParseQuery } from "./hooks/useQuery";
-
-export type Budget = Parse.Object<{
-  available: number;
-}>;
-
-const budgetQuery = new Parse.Query<Budget>("Budget");
+import { useEffect } from "react";
+import { useBudgetStore } from "./stores/budgets";
 
 function App() {
-  console.log(budgetQuery);
+  const items = useBudgetStore((state) => state.items);
+  const isLoading = useBudgetStore((state) => state.isLoading);
 
-  const data = useParseQuery(budgetQuery);
+  const fetchBudgets = useBudgetStore((state) => state.fetchBudgets);
 
-  console.log(data.results[0]?.get("available"));
+  useEffect(() => {
+    fetchBudgets();
+  }, [fetchBudgets]);
 
-  return <div className=""></div>;
+  if (isLoading) {
+    return <div className="">Loading...</div>;
+  }
+
+  return <div className="">{items.length}</div>;
 }
 
 export default App;
