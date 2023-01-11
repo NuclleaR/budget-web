@@ -1,3 +1,6 @@
+import { BottomNavBar } from "./components/BottomNavBar";
+import { Main } from "./screens/Main";
+
 function App() {
   // const items = useBudgetsStore((state) => state.items);
   // const isLoading = useBudgetsStore((state) => state.isLoading);
@@ -16,7 +19,8 @@ function App() {
 
   return (
     <div>
-      <h1>hello</h1>
+      <Main />
+      <BottomNavBar />
     </div>
   );
 }
