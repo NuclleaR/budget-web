@@ -18,8 +18,8 @@ export const BottomNavBar: FC<BottomNavBarProps> = ({ activeTab, handleClick }) 
   console.log("render");
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-zinc-200 dark:bg-stone-900">
-      <div className="flex justify-evenly">
+    <div className="fixed bottom-0 left-0 right-0 border-t-2 border-gray-500 bg-slate-200 dark:bg-zinc-800">
+      <div className="flex justify-evenly py-2">
         <button
           className="flex flex-col items-center justify-center"
           onClick={handleClickInner}
@@ -27,8 +27,8 @@ export const BottomNavBar: FC<BottomNavBarProps> = ({ activeTab, handleClick }) 
         >
           <svg
             className="fill-black dark:fill-stone-200"
-            width="32"
-            height="32"
+            width="24"
+            height="24"
             viewBox="0 0 32 32"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -45,8 +45,8 @@ export const BottomNavBar: FC<BottomNavBarProps> = ({ activeTab, handleClick }) 
         >
           <svg
             className="fill-black dark:fill-stone-200"
-            height="32"
-            width="32"
+            height="24"
+            width="24"
             version="1.1"
             id="Layer_1"
             xmlns="http://www.w3.org/2000/svg"

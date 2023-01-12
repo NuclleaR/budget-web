@@ -1,6 +1,6 @@
 import { Budget } from "@/models/Budget";
 import { cn } from "@/utils/classNames";
-import { format } from "@/utils/date";
+import { formatMonthYear } from "@/utils/date";
 import { FC } from "react";
 import { Money } from "./Money";
 
@@ -10,13 +10,13 @@ export type CardProps = {
   onRefresh: () => void;
 };
 
-export const Card: FC<CardProps> = ({ budget, onRefresh, className }) => {
+export const BudgetCard: FC<CardProps> = ({ budget, onRefresh, className }) => {
   console.log("budget", budget);
 
   return (
     <div className={cn("rounded-xl bg-black p-4", className)}>
       <div className="flex justify-between capitalize">
-        {format(budget.get("date"))}
+        {formatMonthYear(budget.get("date"))}
         <button onClick={onRefresh}>
           <svg
             width="24"

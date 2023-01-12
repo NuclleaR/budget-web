@@ -18,10 +18,10 @@ function App() {
   // console.log("color", Color.fromInt(categories[0]?.get("color")));
 
   return (
-    <div>
+    <>
       <Main />
       <BottomNavBar />
-    </div>
+    </>
   );
 }
 
