@@ -1,4 +1,4 @@
-import create, { StoreApi, UseBoundStore } from "zustand";
+import { create, StoreApi, UseBoundStore } from "zustand";
 
 export interface ListState<T extends Parse.Object<Parse.Attributes>> {
   items: T[];

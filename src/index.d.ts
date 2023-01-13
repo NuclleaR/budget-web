@@ -1,5 +1,7 @@
 type Tab = "0" | "1";
 
+declare let self: ServiceWorkerGlobalScope;
+
 declare namespace JSX {
   interface IntrinsicElements {
     button: React.DetailedHTMLProps<
