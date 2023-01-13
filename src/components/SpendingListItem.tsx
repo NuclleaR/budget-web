@@ -29,7 +29,11 @@ export const SpendingListItem: FC<SpendingListItemProps> = ({ spending, position
         <div>{spending.get("category").get("name")}</div>
       </div>
       <div className="flex flex-col items-end">
-        <Money amount={spending.get("amount")} className="text-xs" />
+        <Money
+          amount={spending.get("amount")}
+          currency={spending.get("currency")}
+          className="text-xs"
+        />
         <div>{formatDayMonthYear(spending.get("date"))}</div>
       </div>
     </div>

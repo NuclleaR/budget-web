@@ -21,10 +21,8 @@ export const SpendingList: FC<SpendingListProps> = () => {
     overscan: 5,
   });
 
-  console.log("SpendingList render");
-
   return isLoading ? (
-    <div>Loading...</div>
+    <div className="py-10 text-center">Loading...</div>
   ) : (
     <div className="overflow-y-auto" ref={listRef}>
       <div
