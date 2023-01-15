@@ -1,5 +1,6 @@
 import { BudgetCard } from "@/screens/components/BudgetCard";
-import { CSSProperties, FC } from "react";
+import { getAllData } from "@/stores";
+import { CSSProperties, FC, useEffect } from "react";
 import { ListHeader } from "./components/ListHeader";
 import { SpendingList } from "./components/SpendingList";
 
@@ -11,6 +12,10 @@ const styles: CSSProperties = {
 
 export const Main: FC = () => {
   console.log("Main render");
+
+  useEffect(() => {
+    getAllData();
+  }, []);
 
   return (
     <div className="relative h-full w-full bg-gradient-to-br from-violet-500 to-fuchsia-500 pt-4">

@@ -1,4 +1,4 @@
-import { create, StoreApi, UseBoundStore } from "zustand";
+import { Mutate, StoreApi } from "zustand";
 
 export interface ListState<T extends Parse.Object<Parse.Attributes>> {
   items: T[];
@@ -6,23 +6,22 @@ export interface ListState<T extends Parse.Object<Parse.Attributes>> {
   isLive: boolean;
   error: unknown; // TODO replace
   query: Parse.Query<T> | null | undefined;
-  fetchBudgets: (enableLiveQuery?: boolean) => Promise<void>;
+  fetchItems: (enableLiveQuery?: boolean) => Promise<void>;
   setQuery: (query: Parse.Query<T>) => void;
 }
 
-export function getListStore<
-  T extends Parse.Object<Parse.Attributes>,
->(
+export function listSlice<T extends Parse.Object<Parse.Attributes>>(
+  set: Mutate<StoreApi<ListState<T>>, []>["setState"],
+  get: Mutate<StoreApi<ListState<T>>, []>["getState"],
   query?: Parse.Query<T>,
-  fetchOnInit = false,
-): UseBoundStore<StoreApi<ListState<T>>> {
-  const store = create<ListState<T>>((set, get) => ({
+): ListState<T> {
+  return {
     items: [],
     isLoading: false,
     isLive: false,
     error: null,
     query: query,
-    fetchBudgets: async (enableLiveQuery = true) => {
+    fetchItems: async (enableLiveQuery = true) => {
       const { query, isLive } = get();
       if (!query) {
         return;
@@ -64,11 +63,5 @@ export function getListStore<
     setQuery: (query) => {
       set({ query });
     },
-  }));
-
-  if (fetchOnInit) {
-    store.getState().fetchBudgets();
-  }
-
-  return store;
+  };
 }

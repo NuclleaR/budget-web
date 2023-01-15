@@ -21,8 +21,6 @@ export const SpendingList: FC<SpendingListProps> = () => {
     overscan: 5,
   });
 
-  console.log("SpendingList render");
-
   return isLoading ? (
     <div>Loading...</div>
   ) : (
