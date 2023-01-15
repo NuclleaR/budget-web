@@ -1,7 +1,7 @@
 import { Money } from "@/components/Money";
 import { useBudgetsStore } from "@/stores";
 import { FC } from "react";
-import shallow from "zustand/shallow";
+import { shallow } from "zustand/shallow";
 
 export type ListHeaderProps = {};
 

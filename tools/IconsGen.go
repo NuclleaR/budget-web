@@ -124,8 +124,8 @@ func kebabToCamel(data string) string {
 }
 
 var tsTemplate = `export enum FontAwesome {
-	{{- range $index, $element:= .IconData}}
-	{{$element.Name}} = {{$index}},
+	{{- range $element:= .IconData}}
+	{{$element.Name}} = "{{$element.Name}}",
 	{{- end}}
 }
 

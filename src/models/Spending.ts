@@ -9,4 +9,5 @@ export type Spending = Parse.Object<{
   currency: Currency;
   date: Date;
   parent: ParentCategory;
+  comment?: string;
 }>;

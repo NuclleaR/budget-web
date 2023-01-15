@@ -2,7 +2,7 @@ import { SpendingListItem } from "@/components/SpendingListItem";
 import { useSpendingsStore } from "@/stores";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { FC, useRef } from "react";
-import shallow from "zustand/shallow";
+import { shallow } from "zustand/shallow";
 
 export type SpendingListProps = {};
 

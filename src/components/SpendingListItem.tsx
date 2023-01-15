@@ -1,6 +1,7 @@
 import { Spending } from "@/models/Spending";
 import { formatDayMonthYear } from "@/utils/date";
 import { FC } from "react";
+import { MemoizedCategoryIcon } from "./CategoryIcon";
 import { Money } from "./Money";
 
 export type SpendingListItemProps = {
@@ -25,8 +26,12 @@ export const SpendingListItem: FC<SpendingListItemProps> = ({ spending, position
           : undefined
       }
     >
-      <div className="flex">
-        <div>{spending.get("category").get("name")}</div>
+      <div className="flex items-center">
+        <MemoizedCategoryIcon categoryId={spending.get("category").id} className="mr-4" />
+        <div className="flex flex-col">
+          <div className="text-lg font-medium">{spending.get("category").get("name")}</div>
+          <div className="text-sm">{spending.get("comment")}</div>
+        </div>
       </div>
       <div className="flex flex-col items-end">
         <Money amount={spending.get("amount")} className="text-xs" />

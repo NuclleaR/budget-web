@@ -8,11 +8,7 @@ export type Category = Parse.Object<{
   color: number;
   name: string;
   deleted: boolean;
-  iconCode: Record<IconStyle, FontAwesome>;
+  iconName: FontAwesome;
+  iconFont: IconStyle;
   parent: ParentCategory;
 }>;
-
-// const data = Object.entries(spending.get("category").get("iconCode")).at(0) as [
-//   IconStyle,
-//   FontAwesome,
-// ];
