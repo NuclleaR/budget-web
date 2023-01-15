@@ -9,12 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-router": "0.0.1-beta.48",
     "@tanstack/react-virtual": "3.0.0-beta.36",
     "parse": "^3.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-use": "^17.4.0",
-    "zustand": "^4.3.1"
+    "zustand": "^4.3.2"
   },
   "devDependencies": {
     "@types/parse": "^3.0.2",

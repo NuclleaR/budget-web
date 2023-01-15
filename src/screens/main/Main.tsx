@@ -1,5 +1,6 @@
-import { BudgetCard } from "@/screens/components/BudgetCard";
+import { BudgetCard } from "@/screens/main/components/BudgetCard";
 import { CSSProperties, FC } from "react";
+import { rootRoute } from "../root";
 import { ListHeader } from "./components/ListHeader";
 import { SpendingList } from "./components/SpendingList";
 
@@ -9,7 +10,7 @@ const styles: CSSProperties = {
   height: "calc(100% - 250px)",
 };
 
-export const Main: FC = () => {
+const Main: FC = () => {
   console.log("Main render");
 
   return (
@@ -27,3 +28,8 @@ export const Main: FC = () => {
     </div>
   );
 };
+
+export const homeRoute = rootRoute.createRoute({
+  path: "/home",
+  component: Main,
+});

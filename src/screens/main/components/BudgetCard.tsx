@@ -2,7 +2,7 @@ import { useBudgetsStore } from "@/stores";
 import { cn } from "@/utils/classNames";
 import { formatMonthYear } from "@/utils/date";
 import { FC } from "react";
-import { Money } from "../../components/Money";
+import { Money } from "../../../components/Money";
 
 export type CardProps = {
   className?: string;
