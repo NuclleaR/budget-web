@@ -7,9 +7,6 @@ export default defineConfig({
   plugins: [
     react(),
   ],
-  optimizeDeps: {
-    include: ["@parse/react"],
-  },
   resolve: {
     alias: [
       { find: "@", replacement: path.resolve(__dirname, "src") },
