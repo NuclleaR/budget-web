@@ -2,6 +2,7 @@ import { Money } from "@/components/Money";
 import { useBudgetsStore } from "@/stores";
 import { FC } from "react";
 import { shallow } from "zustand/shallow";
+import { AddSpending } from "./AddSpending";
 
 export type ListHeaderProps = {};
 
@@ -23,8 +24,9 @@ export const ListHeader: FC<ListHeaderProps> = () => {
   console.log("ListHeader render");
 
   return (
-    <div className="p-4">
+    <div className="flex justify-between p-4">
       <Money amount={spent} currency={currency} />
+      <AddSpending />
     </div>
   );
 };

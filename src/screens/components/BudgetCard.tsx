@@ -17,7 +17,7 @@ export const BudgetCard: FC<CardProps> = ({ onRefresh, className }) => {
     <div className={cn("flex h-28 flex-col justify-between rounded-xl bg-black p-4", className)}>
       {budget != null ? (
         <>
-          <div className="flex justify-between capitalize">
+          <div className="flex justify-between text-2xl capitalize">
             {formatMonthYear(budget.get("date"))}
             <button type="button" className="-mt-2 -mr-2 p-2" title="refresh" onClick={onRefresh}>
               <svg
