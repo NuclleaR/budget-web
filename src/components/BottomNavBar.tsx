@@ -1,3 +1,4 @@
+import { t } from "@/utils/translation";
 import { FC, SyntheticEvent } from "react";
 
 export type BottomNavBarProps = {
@@ -127,7 +128,7 @@ export const BottomNavBar: FC<BottomNavBarProps> = ({ activeTab, handleClick }) 
               </g>
             </g>
           </svg>
-          <span className="text-black dark:text-stone-200">Budgets</span>
+          <span className="text-black dark:text-stone-200">{t("budgets")}</span>
         </button>
       </div>
     </div>

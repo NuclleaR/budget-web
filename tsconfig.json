@@ -19,6 +19,7 @@
       "parse/dist/parse.min.js": ["./node_modules/@types/parse/index.d.ts"],
       "@/*": ["./src/*"]
     }
+    // "types": ["vite-plugin-i18next-loader", "vite-plugin-i18next-loader/client"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

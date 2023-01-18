@@ -1,4 +1,5 @@
 import { cn } from "@/utils/classNames";
+import { t } from "@/utils/translation";
 import { Dialog, Transition } from "@headlessui/react";
 import { FC, Fragment, PropsWithChildren } from "react";
 
@@ -16,7 +17,7 @@ export const SlideModal: FC<PropsWithChildren<SlideModalProps>> = ({
   onClose,
   onOk,
   reverseActions = false,
-  okLabel = "Ok",
+  okLabel = t("ok"),
   children,
   title,
 }) => {
@@ -71,7 +72,7 @@ export const SlideModal: FC<PropsWithChildren<SlideModalProps>> = ({
                 className="flex-1 rounded-md bg-red-300 px-4 py-2 text-red-900 outline-none"
                 onClick={onClose}
               >
-                Cancel
+                {t("cancel")}
               </button>
             </div>
           </Dialog.Panel>

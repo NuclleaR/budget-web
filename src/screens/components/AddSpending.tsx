@@ -1,3 +1,4 @@
+import { t } from "@/utils/translation";
 import { FC, useState } from "react";
 import { SlideModal } from "../../components/SlideModal";
 
@@ -6,6 +7,8 @@ export type AddSpendingProps = {};
 export const AddSpending: FC<AddSpendingProps> = () => {
   const [visible, setVisible] = useState(false);
 
+  const addSpendingTitile = t("addSpending");
+
   return (
     <>
       <button
@@ -13,10 +16,10 @@ export const AddSpending: FC<AddSpendingProps> = () => {
           setVisible(true);
         }}
       >
-        Add spending
+        {addSpendingTitile}
       </button>
       <SlideModal
-        title="Add spending"
+        title={addSpendingTitile}
         visible={visible}
         onClose={() => {
           setVisible(false);

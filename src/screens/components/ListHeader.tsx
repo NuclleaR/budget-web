@@ -21,8 +21,6 @@ export const ListHeader: FC<ListHeaderProps> = () => {
     } as const;
   }, shallow);
 
-  console.log("ListHeader render");
-
   return (
     <div className="flex justify-between p-4">
       <Money amount={spent} currency={currency} />
