@@ -29,7 +29,7 @@ export const AddSpending: FC<AddSpendingProps> = () => {
           setVisible(false);
         }}
       >
-        <form>
+        <form className="flex flex-col">
           <FormInput label={t("amount")} />
         </form>
       </SlideModal>
