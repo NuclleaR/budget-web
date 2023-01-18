@@ -1,3 +1,4 @@
+import { FormInput } from "@/components/form/FormInput";
 import { t } from "@/utils/translation";
 import { FC, useState } from "react";
 import { SlideModal } from "../../components/SlideModal";
@@ -28,10 +29,9 @@ export const AddSpending: FC<AddSpendingProps> = () => {
           setVisible(false);
         }}
       >
-        <label>
-          <span>Amount</span>
-          <input type="number" />
-        </label>
+        <form>
+          <FormInput label={t("amount")} />
+        </form>
       </SlideModal>
     </>
   );
