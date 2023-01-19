@@ -3,5 +3,10 @@
   "cancel": "Відміна",
   "addSpending": "Додати витрату",
   "budgets": "Бюджети",
-  "amount": "Сума"
+  "amount": "Сума",
+  "inputAmount": "Введіть суму",
+  "date": "Дата",
+  "category": "Категорія",
+  "comment": "Коментар",
+  "inputComment": "Додати коментар"
 }

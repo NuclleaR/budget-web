@@ -1,4 +1,5 @@
 import { FormInput } from "@/components/form/FormInput";
+import { Select } from "@/components/form/Select";
 import { t } from "@/utils/translation";
 import { FC, useState } from "react";
 import { SlideModal } from "../../components/SlideModal";
@@ -30,7 +31,10 @@ export const AddSpending: FC<AddSpendingProps> = () => {
         }}
       >
         <form className="flex flex-col">
-          <FormInput label={t("amount")} />
+          <FormInput label={t("amount")} type="number" placeholder={t("inputAmount")} />
+          <FormInput label={t("date")} type="date" />
+          <Select label={t("category")} />
+          <FormInput label={t("comment")} type="text" placeholder={t("inputComment")} />
         </form>
       </SlideModal>
     </>

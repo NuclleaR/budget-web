@@ -3,5 +3,10 @@
   "cancel": "Cancel",
   "addSpending": "Add spending",
   "budgets": "Budgets",
-  "amount": "Amount"
+  "amount": "Amount",
+  "inputAmount": "Input amount",
+  "date": "Date",
+  "category": "Category",
+  "comment": "Comment",
+  "inputComment": "Input comment"
 }
