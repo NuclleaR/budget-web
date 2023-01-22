@@ -1,5 +1,8 @@
+import { cn } from "@/utils/classNames";
 import { Listbox, Transition } from "@headlessui/react";
-import { Fragment, ReactElement, useState } from "react";
+import { Fragment, ReactElement, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { usePopper } from "react-popper";
 
 const people = [
   { name: "Wade Cooper" },
@@ -11,57 +14,82 @@ const people = [
 ];
 
 export type SelectProps<T> = {
-  className?: string;
   items?: T[];
   label?: string;
+  onChange?: (value: T | null) => void;
+  name?: string;
+  renderFn?: (props: {
+    item: T;
+    active: boolean;
+    selected: boolean;
+    disabled: boolean;
+  }) => JSX.Element;
+  children: (selected: T | null) => JSX.Element;
 };
 
-export const Select: <T>(props: SelectProps<T>) => ReactElement = ({ items, className, label }) => {
-  const [selected, setSelected] = useState(people[0]);
+export const Select: <T>(props: SelectProps<T>) => ReactElement = <T,>({
+  items,
+  label,
+  renderFn,
+  children,
+  onChange,
+  name,
+}: SelectProps<T>): ReactElement => {
+  const [selected, setSelected] = useState<T | null>(null);
+
+  const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
+  const [popperElement, setPopperElement] = useState<HTMLUListElement | null>(null);
+
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    placement: "top-end",
+  });
+
+  useEffect(() => {
+    onChange?.(selected);
+  }, [selected]);
 
   return (
     <label className="flex h-10 items-center justify-between">
       <span>{label}</span>
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={selected} onChange={setSelected} name={name}>
         <div className="relative mt-1">
-          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncate">{selected.name}</span>
-          </Listbox.Button>
-          <Transition
-            as={Fragment}
-            leave="transition ease-in duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+          <Listbox.Button
+            ref={setReferenceElement}
+            className="relative w-full bg-inherit px-2 py-1 text-right text-inherit outline-none"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {people.map((person, personIdx) => (
-                <Listbox.Option
-                  key={personIdx}
-                  className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active ? "bg-amber-100 text-amber-900" : "text-gray-900"
-                    }`
-                  }
-                  value={person}
-                >
-                  {({ selected }) => (
-                    <>
-                      <span
-                        className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
-                      >
-                        {person.name}
-                      </span>
-                      {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                          check
-                        </span>
-                      ) : null}
-                    </>
-                  )}
-                </Listbox.Option>
-              ))}
-            </Listbox.Options>
-          </Transition>
+            {children(selected)}
+          </Listbox.Button>
+          {createPortal(
+            <Transition
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Listbox.Options
+                ref={setPopperElement}
+                style={styles.popper}
+                className="z-50 mt-1 mb-1 max-h-96 overflow-auto rounded-xl bg-inherit py-1 drop-shadow-lg"
+                {...attributes.popper}
+              >
+                {items?.map((item, itemIdx) => (
+                  <Listbox.Option
+                    key={itemIdx}
+                    className={({ active, selected }) =>
+                      cn(`relative cursor-default select-none py-2 px-4`, {
+                        "bg-gray-700 bg-opacity-70": active,
+                        "bg-gray-700 bg-opacity-50": selected && !active,
+                      })
+                    }
+                    value={item}
+                  >
+                    {renderFn != null ? (props) => renderFn({ item, ...props }) : null}
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Transition>,
+            document.body,
+          )}
         </div>
       </Listbox>
     </label>

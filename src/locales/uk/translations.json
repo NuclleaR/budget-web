@@ -8,5 +8,6 @@
   "date": "Дата",
   "category": "Категорія",
   "comment": "Коментар",
-  "inputComment": "Додати коментар"
+  "inputComment": "Додати коментар",
+  "selectCategory": "Виберіть категорію"
 }

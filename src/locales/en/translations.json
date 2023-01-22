@@ -8,5 +8,6 @@
   "date": "Date",
   "category": "Category",
   "comment": "Comment",
-  "inputComment": "Input comment"
+  "inputComment": "Input comment",
+  "selectCategory": "Select category"
 }
