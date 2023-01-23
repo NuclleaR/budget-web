@@ -10,6 +10,6 @@ export const useSpendingsStore = create<ListState<Spending>>()((
   ...listSlice(
     set,
     get,
-    new Parse.Query<Spending>("Spendings").descending("date"),
+    new Parse.Query(Spending).descending("date"),
   ),
 }));

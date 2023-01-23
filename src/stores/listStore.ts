@@ -37,16 +37,21 @@ export function listSlice<T extends Parse.Object<Parse.Attributes>>(
       }
       if (enableLiveQuery && !isLive) {
         const subscription = await query.subscribe();
+        console.log(subscription);
+
         subscription.on("open", () => {
+          console.log("open");
           set({ isLive: true });
         });
         subscription.on("close", () => {
           set({ isLive: false });
         });
         subscription.on("create", (object) => {
+          console.log("create", object);
           set((state) => ({ items: [...state.items, object as T] }));
         });
         subscription.on("update", (object) => {
+          console.log("update", object);
           set((state) => ({
             items: state.items.map((item) =>
               item.id === object.id ? object as T : item
@@ -54,6 +59,7 @@ export function listSlice<T extends Parse.Object<Parse.Attributes>>(
           }));
         });
         subscription.on("delete", (object) => {
+          console.log("delete", object);
           set((state) => ({
             items: state.items.filter((item) => item.id !== object.id),
           }));

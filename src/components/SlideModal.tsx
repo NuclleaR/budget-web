@@ -10,6 +10,7 @@ export type SlideModalProps = {
   reverseActions?: boolean;
   title: string;
   okLabel?: string;
+  okEnabled?: boolean;
 };
 
 export const SlideModal: FC<PropsWithChildren<SlideModalProps>> = ({
@@ -20,6 +21,7 @@ export const SlideModal: FC<PropsWithChildren<SlideModalProps>> = ({
   okLabel = t("ok"),
   children,
   title,
+  okEnabled = true,
 }) => {
   return (
     <Transition appear show={visible} as={Fragment}>
@@ -62,8 +64,9 @@ export const SlideModal: FC<PropsWithChildren<SlideModalProps>> = ({
             >
               <button
                 type="button"
-                className="flex-1 rounded-md bg-green-300 px-4 py-2 text-green-900 outline-none"
+                className="flex-1 rounded-md bg-green-300 px-4 py-2 text-green-900 outline-none disabled:opacity-25"
                 onClick={onOk}
+                disabled={!okEnabled}
               >
                 {okLabel}
               </button>

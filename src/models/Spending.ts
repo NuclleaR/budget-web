@@ -3,11 +3,24 @@ import Parse from "parse/dist/parse.min.js";
 import { Category } from "./Category";
 import { ParentCategory } from "./ParentCategory";
 
-export type Spending = Parse.Object<{
+export interface SpendingAttributes {
   amount: number;
   category: Category;
-  currency: Currency;
   date: Date;
-  parent: ParentCategory;
+  currency?: Currency;
+  parent?: ParentCategory;
   comment?: string;
-}>;
+}
+
+export class Spending extends Parse.Object<SpendingAttributes> {
+  constructor(attributes?: SpendingAttributes) {
+    super("Spendings", attributes as SpendingAttributes);
+  }
+
+  isValid(): boolean {
+    return this.get("amount") > 0 && this.get("category") !== undefined &&
+      this.get("date") !== undefined;
+  }
+}
+
+Parse.Object.registerSubclass("Spendings", Spending);

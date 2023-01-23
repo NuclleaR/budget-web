@@ -4,7 +4,10 @@ import { useCategoriesStore } from "./categoriesStore";
 import { useParentCategoriesStore } from "./parentCategoriesStore";
 import { useSpendingsStore } from "./spendingsStore";
 
-initializeParse(import.meta.env.VITE_PARSE_SERVER, import.meta.env.VITE_APP_ID);
+initializeParse(
+  import.meta.env.VITE_PARSE_SERVER_DEV,
+  import.meta.env.VITE_APP_ID,
+);
 
 function getAllData() {
   useBudgetsStore.getState().fetchItems();
