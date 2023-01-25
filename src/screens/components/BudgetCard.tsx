@@ -14,7 +14,12 @@ export const BudgetCard: FC<CardProps> = ({ onRefresh, className }) => {
   const isLoading = useBudgetsStore((state) => state.isLoading);
 
   return (
-    <div className={cn("flex h-28 flex-col justify-between rounded-xl bg-black p-4", className)}>
+    <div
+      className={cn(
+        "flex h-28 flex-col justify-between rounded-xl bg-black p-4 text-neutral-200",
+        className,
+      )}
+    >
       {budget != null ? (
         <>
           <div className="flex justify-between text-2xl capitalize">

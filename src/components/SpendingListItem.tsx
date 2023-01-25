@@ -12,7 +12,7 @@ export type SpendingListItemProps = {
 export const SpendingListItem: FC<SpendingListItemProps> = ({ spending, position }) => {
   return (
     <div
-      className="flex justify-between border-t-2 border-gray-500 p-4"
+      className="flex justify-between border-t-[1px] border-gray-500 p-4"
       style={
         position != null
           ? {
