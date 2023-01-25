@@ -37,7 +37,6 @@ export function listSlice<T extends Parse.Object<Parse.Attributes>>(
       }
       if (enableLiveQuery && !isLive) {
         const subscription = await query.subscribe();
-        console.log(subscription);
 
         subscription.on("open", () => {
           console.log("open");

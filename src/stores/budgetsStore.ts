@@ -1,5 +1,5 @@
 import { Budget } from "@/models/Budget";
-import Parse from "parse/dist/parse.min.js";
+import { Query } from "parse/dist/parse.min.js";
 import { create } from "zustand";
 import { listSlice, ListState } from "./listStore";
 
@@ -10,7 +10,18 @@ type BudgetStore = {
 export const useBudgetsStore = create<BudgetStore & ListState<Budget>>()((
   set,
   get,
-) => ({
-  currentBudget: null,
-  ...listSlice(set, get, new Parse.Query<Budget>("Budget").descending("date")),
-}));
+) => {
+  const slice = listSlice(
+    set,
+    get,
+    new Query<Budget>("Budget").descending("date"),
+  );
+  return ({
+    currentBudget: null,
+    ...slice,
+    fetchItems: async (enableLiveQuery?: boolean) => {
+      slice.fetchItems(enableLiveQuery);
+      console.log("fetchItems", get());
+    },
+  });
+});
