@@ -6,7 +6,7 @@ import { useCategoriesStore } from "@/stores";
 import { t } from "@/utils/translation";
 // import Parse from "parse/dist/parse.min.js";
 import { ChangeEvent, FC, useCallback, useRef, useState } from "react";
-import { SlideModal } from "../../components/SlideModal";
+import { SlideModal } from "../../../components/SlideModal";
 import { CategoryListItem } from "./CategoryListItem";
 
 export type AddSpendingProps = {};

@@ -3,7 +3,7 @@ import Parse from "parse/dist/parse.min.js";
 import { create } from "zustand";
 import { listSlice, ListState } from "./listStore";
 
-export const useCategoriesStore = create<ListState<Category>>()((
+export const useCategoriesStore = create<ListState<Category>>((
   set,
   get,
 ) => ({
