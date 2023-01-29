@@ -1,25 +1,25 @@
 import { FormInput } from "@/components/form/FormInput";
+import { router } from "@/router";
 import { t } from "@/utils/translation";
-import { Link, Route, useRouterStore } from "@tanstack/react-router";
+import { Link, Route } from "@tanstack/react-router";
 import Parse from "parse/dist/parse.min.js";
 import { ChangeEvent, FC, FormEvent, useEffect, useRef, useState } from "react";
 import { z, ZodError } from "zod";
 import { rootRoute } from "../__root";
 
 const schema = z.object({
-  login: z.string().email(),
+  login: z.string(),
   password: z.string().min(6),
 });
 
 type LoginData = z.infer<typeof schema>;
 
 const Auth: FC = () => {
-  const routerStore = useRouterStore();
-
   const formData = useRef<LoginData>({ login: "", password: "" });
   const [isReqisterAllowed, setIfRegisterAllowed] = useState<boolean>(false);
   const [emailValidation, setEmailValidation] = useState<string[] | undefined>();
   const [passwordValidation, setPasswordValidation] = useState<string[] | undefined>();
+  const [parseError, setParseError] = useState<string | undefined>();
 
   useEffect(() => {
     Parse.Config.get().then((config) => {
@@ -30,13 +30,19 @@ const Auth: FC = () => {
     });
   }, []);
 
-  console.log("Auth", routerStore.status);
+  console.log("Auth");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const data = schema.parse(formData.current);
-      // TODO Add login logic
+      const user = await Parse.User.logIn(data.login, data.password);
+      // TODO: Add to store
+      console.log("User logged in", user);
+      router.navigate({
+        to: "/main",
+        replace: true,
+      });
       console.log("submit", data);
     } catch (error) {
       if (error instanceof ZodError) {
@@ -47,6 +53,9 @@ const Auth: FC = () => {
         if (formatted.password) {
           setPasswordValidation(formatted.password._errors);
         }
+      } else {
+        console.log("error", error);
+        setParseError((error as Error).message);
       }
     }
   };
@@ -68,7 +77,7 @@ const Auth: FC = () => {
           <FormInput
             label={t("login")}
             className="border-b border-b-stone-800"
-            type="email"
+            type="text"
             name="login"
             errors={emailValidation}
             required
@@ -84,6 +93,7 @@ const Auth: FC = () => {
           <button className="mt-8 w-full rounded bg-stone-800 px-4 py-2 text-white" type="submit">
             {t("signIn")}
           </button>
+          {parseError && <div className="mt-4 text-center text-red-500">{parseError}</div>}
         </form>
         {isReqisterAllowed && (
           <Link to="/register" replace className="mt-8 text-stone-800">

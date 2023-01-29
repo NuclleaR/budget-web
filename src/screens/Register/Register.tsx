@@ -5,8 +5,6 @@ import { Route, useNavigate } from "@tanstack/react-router";
 import Parse from "parse/dist/parse.min.js";
 import { ChangeEvent, FC, FormEvent, useRef, useState } from "react";
 import { z, ZodError } from "zod";
-import { authRoute } from "../Auth/Auth";
-import { mainRoute } from "../Main/Main";
 import { rootRoute } from "../__root";
 
 const schema = z.object({
@@ -28,7 +26,7 @@ const Register: FC = () => {
 
   const handleBack = () => {
     router.navigate({
-      to: authRoute.fullPath,
+      to: "/",
       replace: true,
     });
   };
@@ -56,7 +54,7 @@ const Register: FC = () => {
       try {
         await user.signUp();
         router.navigate({
-          to: mainRoute.fullPath,
+          to: "/main",
           replace: true,
         });
       } catch (error) {

@@ -14,6 +14,9 @@ const AppLayout: FC = () => (
       <Link className="Solid" to="/budgets">
         <span>{unicodeMap["hryvniaSign"]}</span>
       </Link>
+      <Link className="Solid" to="/settings">
+        <span>{unicodeMap["gear"]}</span>
+      </Link>
     </BottomNavBar>
   </>
 );
