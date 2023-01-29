@@ -4,10 +4,12 @@ import { layoutRoute } from "./screens";
 import { authRoute } from "./screens/Auth/Auth";
 import { budgetsRoute } from "./screens/Budgets/Budgets";
 import { mainRoute } from "./screens/Main/Main";
+import { registerRoute } from "./screens/Register/Register";
 import { rootRoute } from "./screens/__root";
 
 const routeTree = rootRoute.addChildren([
   authRoute,
+  registerRoute,
   layoutRoute.addChildren([mainRoute, budgetsRoute]),
   // dashboardRoute.addChildren([
   //   dashboardIndexRoute,

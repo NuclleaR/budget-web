@@ -2,11 +2,6 @@ import { RouterProvider } from "@tanstack/react-router";
 import { router } from "./router";
 
 function App() {
-  // const [defaultLoaderMaxAge, setDefaultLoaderMaxAge] = useSessionStorage(
-  //   "defaultLoaderMaxAge",
-  //   5000,
-  // );
-
   return (
     <RouterProvider
       router={router}

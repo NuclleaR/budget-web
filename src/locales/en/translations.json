@@ -13,5 +13,8 @@
   "loginMessage": "Please login to continue",
   "login": "Login",
   "pass": "Password",
-  "signIn": "Sign in"
+  "email": "Email",
+  "back": "Back",
+  "signIn": "Sign in",
+  "register": "Register"
 }
