@@ -1,8 +1,6 @@
 import { BudgetCard } from "@/screens/Main/components/BudgetCard";
 import { getAllData } from "@/stores";
-import { Route } from "@tanstack/react-router";
 import { CSSProperties, FC, useEffect } from "react";
-import { layoutRoute } from "..";
 import { ListHeader } from "./components/ListHeader";
 import { SpendingList } from "./components/SpendingList";
 
@@ -12,7 +10,7 @@ const styles: CSSProperties = {
   height: "calc(100% - 250px)",
 };
 
-const Main: FC = () => {
+export const Main: FC = () => {
   console.log("Main render");
 
   useEffect(() => {
@@ -31,9 +29,3 @@ const Main: FC = () => {
     </div>
   );
 };
-
-export const mainRoute = new Route({
-  getParentRoute: () => layoutRoute,
-  path: "/main",
-  component: Main,
-});

@@ -1,10 +1,12 @@
+import { router } from "@/router";
+import Parse from "parse/dist/parse.min.js";
 import { Mutate, StoreApi } from "zustand";
 
 export interface ListState<T extends Parse.Object<Parse.Attributes>> {
   items: T[];
   isLoading: boolean;
   isLive: boolean;
-  error: unknown; // TODO replace
+  error: Error | Parse.Error | null;
   query: Parse.Query<T> | null | undefined;
   fetchItems: (enableLiveQuery?: boolean) => Promise<void>;
   setQuery: (query: Parse.Query<T>) => void;
@@ -31,7 +33,19 @@ export function listSlice<T extends Parse.Object<Parse.Attributes>>(
         const results = await query.find();
         set({ items: results });
       } catch (error) {
-        set({ error });
+        if (
+          error instanceof Parse.Error &&
+          (error.code === Parse.Error.INVALID_SESSION_TOKEN ||
+            error.code === Parse.Error.SESSION_MISSING ||
+            error.code === Parse.Error.INVALID_LINKED_SESSION)
+        ) {
+          Parse.User.logOut();
+          router.navigate({
+            to: "/",
+            replace: true,
+          });
+        }
+        set({ error: error as Error | Parse.Error });
       } finally {
         set({ isLoading: false });
       }

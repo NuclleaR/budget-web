@@ -1,28 +1,25 @@
 import { FormInput } from "@/components/form/FormInput";
 import { router } from "@/router";
+import { useUserStore } from "@/stores/userStore";
 import { t } from "@/utils/translation";
-import { Route, useNavigate } from "@tanstack/react-router";
-import Parse from "parse/dist/parse.min.js";
 import { ChangeEvent, FC, FormEvent, useRef, useState } from "react";
 import { z, ZodError } from "zod";
-import { rootRoute } from "../__root";
 
 const schema = z.object({
-  username: z.string().min(3),
-  password: z.string().min(6),
+  username: z.string().min(4),
+  password: z.string().min(8),
   email: z.string().email(),
 });
 
 type RegisterData = z.infer<typeof schema>;
 
-const Register: FC = () => {
+export const Register: FC = () => {
   const formData = useRef<RegisterData>({ username: "", password: "", email: "" });
   const [usernameValidation, setUsernameValidation] = useState<string[] | undefined>();
   const [passwordValidation, setPasswordValidation] = useState<string[] | undefined>();
   const [emailValidation, setEmailValidation] = useState<string[] | undefined>();
-  const [parseError, setParseError] = useState<string | undefined>();
-
-  useNavigate();
+  const [error, setError] = useState<string | undefined>();
+  const register = useUserStore((state) => state.register);
 
   const handleBack = () => {
     router.navigate({
@@ -46,21 +43,7 @@ const Register: FC = () => {
     e.preventDefault();
     try {
       const data = schema.parse(formData.current);
-      // TODO Add register logic
-      const user = new Parse.User();
-      user.set("username", data.username);
-      user.set("password", data.password);
-      user.set("email", data.email);
-      try {
-        await user.signUp();
-        router.navigate({
-          to: "/main",
-          replace: true,
-        });
-      } catch (error) {
-        console.log("Error: " + error);
-        setParseError((error as Error).message);
-      }
+      await register(data.username, data.password, data.email);
     } catch (error) {
       console.log(error);
       if (error instanceof ZodError) {
@@ -74,6 +57,8 @@ const Register: FC = () => {
         if (formatted.email) {
           setEmailValidation(formatted.email._errors);
         }
+      } else {
+        setError((error as Error).message);
       }
     }
   };
@@ -114,7 +99,7 @@ const Register: FC = () => {
           <button className="mt-8 w-full rounded bg-stone-800 px-4 py-2 text-white" type="submit">
             {t("register")}
           </button>
-          {parseError && <p className="text-red-500">{parseError}</p>}
+          {error && <p className="text-red-500">{error}</p>}
         </form>
         <button
           className="mt-8 w-full rounded  px-4 py-2 text-stone-800"
@@ -127,9 +112,3 @@ const Register: FC = () => {
     </div>
   );
 };
-
-export const registerRoute = new Route({
-  getParentRoute: () => rootRoute,
-  path: "/register",
-  component: Register,
-});

@@ -1,11 +1,10 @@
 import { FormInput } from "@/components/form/FormInput";
-import { router } from "@/router";
+import { useUserStore } from "@/stores/userStore";
 import { t } from "@/utils/translation";
-import { Link, Route } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import Parse from "parse/dist/parse.min.js";
 import { ChangeEvent, FC, FormEvent, useEffect, useRef, useState } from "react";
 import { z, ZodError } from "zod";
-import { rootRoute } from "../__root";
 
 const schema = z.object({
   login: z.string(),
@@ -14,7 +13,8 @@ const schema = z.object({
 
 type LoginData = z.infer<typeof schema>;
 
-const Auth: FC = () => {
+export const Auth: FC = () => {
+  const login = useUserStore((state) => state.login);
   const formData = useRef<LoginData>({ login: "", password: "" });
   const [isReqisterAllowed, setIfRegisterAllowed] = useState<boolean>(false);
   const [emailValidation, setEmailValidation] = useState<string[] | undefined>();
@@ -36,15 +36,10 @@ const Auth: FC = () => {
     e.preventDefault();
     try {
       const data = schema.parse(formData.current);
-      const user = await Parse.User.logIn(data.login, data.password);
-      // TODO: Add to store
-      console.log("User logged in", user);
-      router.navigate({
-        to: "/main",
-        replace: true,
-      });
-      console.log("submit", data);
+      console.log("login data", data);
+      await login(data.login, data.password);
     } catch (error) {
+      console.log("login error", error);
       if (error instanceof ZodError) {
         const formatted = (error as ZodError<LoginData>).format();
         if (formatted.login) {
@@ -54,7 +49,6 @@ const Auth: FC = () => {
           setPasswordValidation(formatted.password._errors);
         }
       } else {
-        console.log("error", error);
         setParseError((error as Error).message);
       }
     }
@@ -104,9 +98,3 @@ const Auth: FC = () => {
     </div>
   );
 };
-
-export const authRoute = new Route({
-  getParentRoute: () => rootRoute,
-  path: "/",
-  component: Auth,
-});

@@ -1,10 +1,8 @@
 import { router } from "@/router";
-import { Route } from "@tanstack/react-router";
 import Parse from "parse/dist/parse.min.js";
 import { FC } from "react";
-import { layoutRoute } from "..";
 
-const Settings: FC = () => {
+export const Settings: FC = () => {
   return (
     <div>
       <h1>Settings</h1>
@@ -25,9 +23,3 @@ const Settings: FC = () => {
     </div>
   );
 };
-
-export const settingsRoute = new Route({
-  getParentRoute: () => layoutRoute,
-  path: "/settings",
-  component: Settings,
-});

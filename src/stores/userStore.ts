@@ -1,18 +1,59 @@
+import { router } from "@/router";
 import { User } from "parse/dist/parse.min.js";
 import { create } from "zustand";
 
 type UserStore = {
   currentUser: User | null;
-  login(): void;
-  logout(): void;
+  // TODO: set async parse store. consder to use inbrowser sqlite
+  init(): Promise<void>;
+  login(username: string, password: string): Promise<void>;
+  register(username: string, password: string, email: string): Promise<void>;
+  logout(): Promise<void>;
 };
 
-const userStore = create<UserStore>((set, get) => ({
+export const useUserStore = create<UserStore>((set, get) => ({
   currentUser: null,
-  login(username: string, password: string) {
-    // set({ currentUser: User.current() });
+  async init() {
+    const currentUser = await User.currentAsync();
+    // TODO refactor this...
+    if (currentUser != null) {
+      router.navigate({
+        to: "/main",
+        replace: true,
+      });
+    } else {
+      router.navigate({
+        to: "/",
+        replace: true,
+      });
+    }
+    set({ currentUser });
   },
-  logout() {
+  async login(username: string, password: string) {
+    const user = await User.logIn(username, password);
+    set({ currentUser: user });
+    router.navigate({
+      to: "/main",
+      replace: true,
+    });
+  },
+  async logout() {
+    await User.logOut();
     set({ currentUser: null });
+  },
+  async register(username: string, password: string, email: string) {
+    const user = new User();
+    user.set("username", username);
+    user.set("password", password);
+    user.set("email", email);
+
+    await user.signUp();
+
+    set({ currentUser: user });
+
+    router.navigate({
+      to: "/main",
+      replace: true,
+    });
   },
 }));
