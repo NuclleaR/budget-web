@@ -9,5 +9,9 @@
   "category": "Category",
   "comment": "Comment",
   "inputComment": "Input comment",
-  "selectCategory": "Select category"
+  "selectCategory": "Select category",
+  "loginMessage": "Please login to continue",
+  "login": "Login",
+  "pass": "Password",
+  "signIn": "Sign in"
 }

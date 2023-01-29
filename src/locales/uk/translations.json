@@ -9,5 +9,9 @@
   "category": "Категорія",
   "comment": "Коментар",
   "inputComment": "Додати коментар",
-  "selectCategory": "Виберіть категорію"
+  "selectCategory": "Виберіть категорію",
+  "loginMessage": "Введіть логін та пароль",
+  "login": "Логін",
+  "pass": "Пароль",
+  "signIn": "Увійти"
 }
