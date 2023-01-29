@@ -1,15 +1,15 @@
-import { Outlet, RootRoute, useRouterStore } from "@tanstack/react-router";
+import { useUserStore } from "@/stores/userStore";
+import { Outlet, RootRoute } from "@tanstack/react-router";
+import { Auth } from "./Auth";
 // import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 export const rootRoute = new RootRoute({
   component: () => {
-    const routerStore = useRouterStore();
-
-    console.log("rootRoute", routerStore.status);
+    const user = useUserStore((state) => state.currentUser);
 
     return (
       <>
-        <Outlet />
+        {user ? <Outlet /> : <Auth />}
         {/* <TanStackRouterDevtools position="bottom-right" /> */}
       </>
     );

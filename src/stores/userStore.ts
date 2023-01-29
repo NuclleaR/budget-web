@@ -1,4 +1,3 @@
-import { router } from "@/router";
 import { User } from "parse/dist/parse.min.js";
 import { create } from "zustand";
 
@@ -15,27 +14,11 @@ export const useUserStore = create<UserStore>((set, get) => ({
   currentUser: null,
   async init() {
     const currentUser = await User.currentAsync();
-    // TODO refactor this...
-    if (currentUser != null) {
-      router.navigate({
-        to: "/main",
-        replace: true,
-      });
-    } else {
-      router.navigate({
-        to: "/",
-        replace: true,
-      });
-    }
     set({ currentUser });
   },
   async login(username: string, password: string) {
     const user = await User.logIn(username, password);
     set({ currentUser: user });
-    router.navigate({
-      to: "/main",
-      replace: true,
-    });
   },
   async logout() {
     await User.logOut();
@@ -50,10 +33,5 @@ export const useUserStore = create<UserStore>((set, get) => ({
     await user.signUp();
 
     set({ currentUser: user });
-
-    router.navigate({
-      to: "/main",
-      replace: true,
-    });
   },
 }));

@@ -15,6 +15,7 @@
   "pass": "Password",
   "email": "Email",
   "back": "Back",
+  "settings": "Settings",
   "signIn": "Sign in",
   "register": "Register"
 }

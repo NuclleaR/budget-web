@@ -1,20 +1,19 @@
 import { router } from "@/router";
-import Parse from "parse/dist/parse.min.js";
+import { useUserStore } from "@/stores/userStore";
 import { FC } from "react";
 
 export const Settings: FC = () => {
+  const logout = useUserStore((state) => state.logout);
+
   return (
     <div>
       <h1>Settings</h1>
       <button
-        onClick={() => {
-          console.log("logout", Parse.User.current());
-          Parse.User.logOut().then(() => {
-            console.log(Parse.User.current());
-            router.navigate({
-              to: "/",
-              replace: true,
-            });
+        onClick={async () => {
+          await logout();
+          router.navigate({
+            to: "/",
+            replace: true,
           });
         }}
       >

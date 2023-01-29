@@ -4,6 +4,6 @@ import { Main } from "./Main";
 
 export const mainRoute = new Route({
   getParentRoute: () => layoutRoute,
-  path: "/main",
+  path: "/",
   component: Main,
 });

@@ -1,6 +1,6 @@
-import { router } from "@/router";
 import Parse from "parse/dist/parse.min.js";
 import { Mutate, StoreApi } from "zustand";
+import { useUserStore } from "./userStore";
 
 export interface ListState<T extends Parse.Object<Parse.Attributes>> {
   items: T[];
@@ -39,11 +39,7 @@ export function listSlice<T extends Parse.Object<Parse.Attributes>>(
             error.code === Parse.Error.SESSION_MISSING ||
             error.code === Parse.Error.INVALID_LINKED_SESSION)
         ) {
-          Parse.User.logOut();
-          router.navigate({
-            to: "/",
-            replace: true,
-          });
+          useUserStore.getState().logout();
         }
         set({ error: error as Error | Parse.Error });
       } finally {
