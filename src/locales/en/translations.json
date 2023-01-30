@@ -15,7 +15,8 @@
   "pass": "Password",
   "email": "Email",
   "back": "Back",
-  "settings": "Settings",
   "signIn": "Sign in",
-  "register": "Register"
+  "register": "Register",
+  "budgetFor": "Budget for",
+  "settings": "Settings"
 }
