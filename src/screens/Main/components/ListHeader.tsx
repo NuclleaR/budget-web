@@ -22,7 +22,7 @@ export const ListHeader: FC<ListHeaderProps> = () => {
   }, shallow);
 
   return (
-    <div className="flex justify-between p-4">
+    <div className="flex justify-between border-b border-b-gray-500/30 p-4">
       <Money amount={spent} currency={currency} />
       <AddSpending />
     </div>

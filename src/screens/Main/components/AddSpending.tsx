@@ -71,9 +71,7 @@ export const AddSpending: FC<AddSpendingProps> = () => {
         title={addSpendingTitile}
         visible={visible}
         okEnabled={okEnabled}
-        onClose={() => {
-          setVisible(false);
-        }}
+        onClose={setVisible}
         onOk={() => {
           if (spending.current.isValid()) {
             spending.current

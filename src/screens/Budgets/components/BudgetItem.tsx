@@ -13,7 +13,7 @@ export type BudgetListItemProps = {
 export const BudgetListItem: FC<BudgetListItemProps> = ({ budget, position, size }) => {
   return (
     <div
-      className="inset-0 flex justify-between border-b border-b-gray-500/50 px-5 py-2 last:border-none"
+      className="inset-0 flex justify-between px-5 py-2"
       style={
         position != null
           ? {

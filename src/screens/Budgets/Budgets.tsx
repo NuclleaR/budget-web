@@ -1,4 +1,5 @@
 import { ListHeader } from "@/components/ListHeader";
+import { ListLoader } from "@/components/ListLoader";
 import { VirtualList } from "@/components/VirtualList";
 import { useBudgetsStore } from "@/stores";
 import { t } from "@/utils/translation";
@@ -27,7 +28,7 @@ export const Budgets: FC = () => {
       <ListHeader onAdd={() => {}}>{t("budgets")}</ListHeader>
       <div className="h-full flex-1 overflow-hidden rounded-t-3xl bg-slate-200 pt-2 dark:bg-stone-800">
         {isLoading ? (
-          <div>Loading...</div>
+          <ListLoader />
         ) : (
           <VirtualList count={budgets.length} estimateSize={estimateSize}>
             {(virtualRow) => {

@@ -5,7 +5,7 @@ import { FC, Fragment, PropsWithChildren } from "react";
 
 export type SlideModalProps = {
   visible: boolean;
-  onClose: VoidFunction;
+  onClose(value: boolean): void;
   onOk: VoidFunction;
   reverseActions?: boolean;
   title: string;
@@ -73,7 +73,7 @@ export const SlideModal: FC<PropsWithChildren<SlideModalProps>> = ({
               <button
                 type="button"
                 className="flex-1 rounded-md bg-red-300 px-4 py-2 text-red-900 outline-none"
-                onClick={onClose}
+                onClick={() => onClose(false)}
               >
                 {t("cancel")}
               </button>

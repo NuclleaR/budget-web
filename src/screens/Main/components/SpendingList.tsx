@@ -1,3 +1,4 @@
+import { ListLoader } from "@/components/ListLoader";
 import { SpendingListItem } from "@/components/SpendingListItem";
 import { VirtualList } from "@/components/VirtualList";
 import { useSpendingsStore } from "@/stores";
@@ -15,7 +16,7 @@ export const SpendingList: FC<SpendingListProps> = () => {
   );
 
   return isLoading ? (
-    <div>Loading...</div>
+    <ListLoader />
   ) : (
     <VirtualList count={spendings.length} estimateSize={estimateSize}>
       {(virtualRow) => {
