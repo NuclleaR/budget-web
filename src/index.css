@@ -33,12 +33,37 @@
   @apply bg-slate-200 text-stone-800 dark:bg-zinc-800 dark:text-neutral-200;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+.theme-text {
+  @apply  text-stone-800 dark:text-neutral-200;
+}
+
+.theme-bg {
+  @apply  bg-slate-200 dark:bg-zinc-800;
+}
+
+button,
+textarea,
+input,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator {
   background: transparent;
   @apply absolute inset-0 w-auto h-auto;
 }
 
-input[type="date"]::after {
+input[type="date"]::after,
+input[type="month"]::after {
   content: "📅";
   margin-left: 8px;
 }

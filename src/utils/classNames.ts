@@ -4,6 +4,7 @@ export function cn(
     | number
     | null
     | undefined
+    | false
     | (string | number)[]
     | Record<string, boolean>
   )[]

@@ -1,14 +1,14 @@
 import { cn } from "@/utils/classNames";
-import { Currency, formatCurrency } from "@/utils/currency";
+import { Currency, CurrencyType, formatCurrency } from "@/utils/currency";
 import { FC } from "react";
 
 export type MoneyProps = {
   amount: number;
-  currency?: Currency;
+  currency?: CurrencyType;
   className?: string;
 };
 
-export const Money: FC<MoneyProps> = ({ amount, currency, className }) => {
+export const Money: FC<MoneyProps> = ({ amount, currency = Currency.UAH, className }) => {
   const { value, currencySign, friction } = formatCurrency(amount, currency);
   return (
     <div className={cn("flex items-baseline leading-none", className)}>

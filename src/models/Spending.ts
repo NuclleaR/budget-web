@@ -1,4 +1,4 @@
-import { Currency } from "@/utils/currency";
+import { CurrencyType } from "@/utils/currency";
 import Parse from "parse/dist/parse.min.js";
 import { Category } from "./Category";
 import { ParentCategory } from "./ParentCategory";
@@ -7,7 +7,7 @@ export interface SpendingAttributes {
   amount: number;
   category: Category;
   date: Date;
-  currency?: Currency;
+  currency?: CurrencyType;
   parent?: ParentCategory;
   comment?: string;
 }

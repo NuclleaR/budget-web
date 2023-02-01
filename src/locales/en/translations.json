@@ -18,5 +18,10 @@
   "signIn": "Sign in",
   "register": "Register",
   "budgetFor": "Budget for",
+  "newBudget": "New budget",
+  "editBudget": "Edit budget",
+  "expenseItems": "Expense items",
+  "totalAmount": "Total amount",
+  "currency": "Сurrency",
   "settings": "Settings"
 }

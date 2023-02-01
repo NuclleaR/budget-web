@@ -11,6 +11,7 @@ export type SlideModalProps = {
   title: string;
   okLabel?: string;
   okEnabled?: boolean;
+  afterLeave?(): void;
 };
 
 export const SlideModal: FC<PropsWithChildren<SlideModalProps>> = ({
@@ -22,9 +23,10 @@ export const SlideModal: FC<PropsWithChildren<SlideModalProps>> = ({
   children,
   title,
   okEnabled = true,
+  afterLeave,
 }) => {
   return (
-    <Transition appear show={visible} as={Fragment}>
+    <Transition appear show={visible} as={Fragment} afterLeave={afterLeave}>
       <Dialog
         as="div"
         className="fixed inset-0 z-10 h-screen w-screen overflow-hidden"

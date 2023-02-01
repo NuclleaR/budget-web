@@ -18,5 +18,10 @@
   "signIn": "Увійти",
   "register": "Зареєструватися",
   "budgetFor": "Бюджет на",
+  "newBudget": "Новий бюджет",
+  "editBudget": "Редагувати бюджет",
+  "expenseItems": "Витрати",
+  "totalAmount": "Загальна сума",
+  "currency": "Валюта",
   "settings": "Налаштування"
 }

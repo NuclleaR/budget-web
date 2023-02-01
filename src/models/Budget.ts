@@ -1,4 +1,3 @@
-import { Currency } from "@/utils/currency";
 import { Object } from "parse/dist/parse.min.js";
 
 export type BudgetAttributes = {
@@ -20,4 +19,4 @@ export class Budget extends Object<BudgetAttributes> {
   }
 }
 
-Parse.Object.registerSubclass("Budget", Budget);
+Object.registerSubclass("Budget", Budget);
