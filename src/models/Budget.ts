@@ -1,3 +1,4 @@
+import { CurrencyType } from "@/utils/currency";
 import { Object } from "parse/dist/parse.min.js";
 
 export type BudgetAttributes = {
@@ -6,16 +7,17 @@ export type BudgetAttributes = {
   budgetPlan: Record<string, number>;
   budgetSpending: Record<string, number>;
   date: Date;
-  currency: Currency;
+  currency: CurrencyType;
 };
 
 export class Budget extends Object<BudgetAttributes> {
-  constructor(attributes?: BudgetAttributes) {
+  constructor(attributes?: Partial<BudgetAttributes>) {
     super("Budget", attributes as BudgetAttributes);
   }
 
   isValid(): boolean {
-    return this.get("amount") > 0 && this.get("date") !== undefined;
+    return this.get("amount") > 0 && this.get("date") !== undefined &&
+      this.get("currency") !== undefined;
   }
 }
 

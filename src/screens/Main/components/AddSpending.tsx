@@ -53,10 +53,22 @@ export const AddSpending: FC<AddSpendingProps> = () => {
   function validate() {
     const isValid = spending.current.isValid();
 
-    if (isValid != okEnabled) {
+    console.log("isValid", isValid, okEnabled);
+
+    if (isValid && !okEnabled) {
       setEnabled(isValid);
     }
   }
+
+  const handleSave = useCallback(async () => {
+    try {
+      await spending.current.save();
+      setVisible(false);
+      spending.current = new Spending();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [spending]);
 
   return (
     <>
@@ -64,6 +76,7 @@ export const AddSpending: FC<AddSpendingProps> = () => {
         onClick={() => {
           setVisible(true);
         }}
+        type="button"
       >
         {addSpendingTitile}
       </button>
@@ -72,18 +85,7 @@ export const AddSpending: FC<AddSpendingProps> = () => {
         visible={visible}
         okEnabled={okEnabled}
         onClose={setVisible}
-        onOk={() => {
-          if (spending.current.isValid()) {
-            spending.current
-              .save()
-              .then(() => {
-                setVisible(false);
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          }
-        }}
+        onOk={handleSave}
       >
         <div className="flex flex-col">
           <FormInput
@@ -109,6 +111,7 @@ export const AddSpending: FC<AddSpendingProps> = () => {
             label={t("comment")}
             type="text"
             placeholder={t("inputComment")}
+            onChange={inputHandler}
           />
         </div>
       </SlideModal>

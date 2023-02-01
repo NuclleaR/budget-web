@@ -10,6 +10,9 @@ export interface ListState<T extends Parse.Object<Parse.Attributes>> {
   query: Parse.Query<T> | null | undefined;
   fetchItems: (enableLiveQuery?: boolean) => Promise<void>;
   setQuery: (query: Parse.Query<T>) => void;
+  handleCreate: (object: T) => void;
+  handleUpdate: (object: T) => void;
+  handleDelete: (object: T) => void;
 }
 
 export function listSlice<T extends Parse.Object<Parse.Attributes>>(
@@ -55,28 +58,30 @@ export function listSlice<T extends Parse.Object<Parse.Attributes>>(
         subscription.on("close", () => {
           set({ isLive: false });
         });
-        subscription.on("create", (object) => {
-          console.log("create", object);
-          set((state) => ({ items: [...state.items, object as T] }));
-        });
-        subscription.on("update", (object) => {
-          console.log("update", object);
-          set((state) => ({
-            items: state.items.map((item) =>
-              item.id === object.id ? object as T : item
-            ),
-          }));
-        });
-        subscription.on("delete", (object) => {
-          console.log("delete", object);
-          set((state) => ({
-            items: state.items.filter((item) => item.id !== object.id),
-          }));
-        });
+
+        subscription.on("create", (object) => get().handleCreate(object as T));
+        subscription.on("update", (object) => get().handleUpdate(object as T));
+        subscription.on("delete", (object) => get().handleDelete(object as T));
       }
     },
     setQuery: (query) => {
       set({ query });
+    },
+    handleCreate: (object) => {
+      console.log("create", object);
+      set((state) => ({ items: [object, ...state.items] }));
+    },
+    handleUpdate: (object) => {
+      console.log("update", object);
+      set((state) => ({
+        items: state.items.map((item) => item.id === object.id ? object : item),
+      }));
+    },
+    handleDelete: (object) => {
+      console.log("delete", object);
+      set((state) => ({
+        items: state.items.filter((item) => item.id !== object.id),
+      }));
     },
   };
 }

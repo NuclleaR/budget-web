@@ -8,7 +8,7 @@ export type ListHeaderProps = {};
 
 export const ListHeader: FC<ListHeaderProps> = () => {
   const { spent, currency } = useBudgetsStore((state) => {
-    const budget = state.items.at(0);
+    const budget = state.currentBudget;
     if (budget != null) {
       return {
         spent: budget.get("amount") - budget.get("available"),

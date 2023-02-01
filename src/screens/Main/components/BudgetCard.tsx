@@ -10,7 +10,7 @@ export type CardProps = {
 };
 
 export const BudgetCard: FC<CardProps> = ({ onRefresh, className }) => {
-  const budget = useBudgetsStore((state) => state.items.at(0));
+  const budget = useBudgetsStore((state) => state.currentBudget);
   const isLoading = useBudgetsStore((state) => state.isLoading);
 
   return (
