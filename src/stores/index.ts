@@ -5,7 +5,7 @@ import { useParentCategoriesStore } from "./parentCategoriesStore";
 import { useSpendingsStore } from "./spendingsStore";
 
 initializeParse(
-  import.meta.env.VITE_PARSE_SERVER_DEV,
+  import.meta.env.VITE_PARSE_SERVER,
   import.meta.env.VITE_APP_ID,
 );
 
