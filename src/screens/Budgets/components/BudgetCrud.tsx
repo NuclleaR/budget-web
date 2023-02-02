@@ -22,11 +22,20 @@ export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, s
     (state) => ({ parentCategories: state.items, fetchItems: state.fetchItems }),
     shallow,
   );
-  const [okEnabled, setOkEnabled] = useState(false);
-  const { localVisible, afterLeave, setLocalVisible } = useModalVisible(visible, setVisible);
+  const budget = useRef(initBudget ?? new Budget({ currency: Currency.UAH }));
+
+  const {
+    localVisible,
+    afterLeave,
+    setLocalVisible,
+    okEnabled,
+    setOkEnabled,
+    isLoading,
+    setLoading,
+  } = useModalVisible(visible, setVisible);
+
   const [total, setTotal] = useState(0);
   const [currency, setCurrency] = useState<CurrencyType>(Currency.UAH);
-  const budget = useRef(initBudget ?? new Budget({ currency: Currency.UAH }));
 
   useEffect(() => {
     if (parentCategories.length == 0) {
@@ -73,9 +82,14 @@ export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, s
   }
 
   const handleSave = useCallback(async () => {
-    const savedBudget = await budget.current.save();
-    console.log(savedBudget);
-    setLocalVisible(false);
+    setLoading(true);
+    try {
+      await budget.current.save();
+      setLocalVisible(false);
+      budget.current = new Budget({ currency: Currency.UAH });
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   return (

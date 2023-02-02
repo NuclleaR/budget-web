@@ -1,17 +1,21 @@
 import { cn } from "@/utils/classNames";
 import { Listbox, Transition } from "@headlessui/react";
+import type { Options } from "@popperjs/core";
 import { Fragment, ReactElement, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
 
-const people = [
-  { name: "Wade Cooper" },
-  { name: "Arlene Mccoy" },
-  { name: "Devon Webb" },
-  { name: "Tom Cook" },
-  { name: "Tanya Fox" },
-  { name: "Hellen Schmidt" },
-];
+const popperConfig: Partial<Options> = {
+  placement: "top-end",
+  modifiers: [
+    {
+      name: "offset",
+      options: {
+        offset: [0, 8],
+      },
+    },
+  ],
+};
 
 export type SelectProps<T> = {
   items?: T[];
@@ -40,9 +44,7 @@ export const Select: <T>(props: SelectProps<T>) => ReactElement = <T,>({
   const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
   const [popperElement, setPopperElement] = useState<HTMLUListElement | null>(null);
 
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: "top-end",
-  });
+  const { styles, attributes } = usePopper(referenceElement, popperElement, popperConfig);
 
   useEffect(() => {
     onChange?.(selected);
@@ -69,7 +71,7 @@ export const Select: <T>(props: SelectProps<T>) => ReactElement = <T,>({
               <Listbox.Options
                 ref={setPopperElement}
                 style={styles.popper}
-                className="z-50 mt-1 mb-1 max-h-96 overflow-auto rounded-xl bg-inherit py-1 drop-shadow-lg"
+                className="z-50 max-h-96 overflow-auto rounded-xl bg-inherit py-1 drop-shadow-lg"
                 {...attributes.popper}
               >
                 {items?.map((item, itemIdx) => (

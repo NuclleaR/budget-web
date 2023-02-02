@@ -1,23 +1,35 @@
 import { FormInput } from "@/components/form/FormInput";
 import { Select } from "@/components/form/Select";
+import { useModalVisible } from "@/hooks/useModalVisible";
 import { Category } from "@/models/Category";
 import { Spending } from "@/models/Spending";
 import { useCategoriesStore } from "@/stores";
 import { t } from "@/utils/translation";
-// import Parse from "parse/dist/parse.min.js";
+import { validateEntity } from "@/utils/validators";
 import { ChangeEvent, FC, useCallback, useRef, useState } from "react";
 import { SlideModal } from "../../../components/SlideModal";
 import { CategoryListItem } from "./CategoryListItem";
+// import Parse from "parse/dist/parse.min.js";
 
 export type AddSpendingProps = {};
 
 const addSpendingTitile = t("addSpending");
 
 export const AddSpending: FC<AddSpendingProps> = () => {
-  const [visible, setVisible] = useState(false);
-  const [okEnabled, setEnabled] = useState(false);
   const categories = useCategoriesStore((state) => state.items);
+
   const spending = useRef(new Spending());
+
+  const [visible, setVisible] = useState(false);
+  const {
+    afterLeave,
+    localVisible,
+    setLocalVisible,
+    isLoading,
+    okEnabled,
+    setLoading,
+    setOkEnabled,
+  } = useModalVisible(visible, setVisible);
 
   const inputHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -27,7 +39,7 @@ export const AddSpending: FC<AddSpendingProps> = () => {
           spending.current.set("amount", 0);
           break;
         }
-        spending.current.set("amount", parseInt(value, 10));
+        spending.current.set("amount", parseFloat(value));
         break;
       case "date":
         spending.current.set("date", new Date(value));
@@ -38,7 +50,7 @@ export const AddSpending: FC<AddSpendingProps> = () => {
       default:
         break;
     }
-    validate();
+    validateEntity(spending.current, setOkEnabled);
   }, []);
 
   const categoryHandler = useCallback<(item: Category | null) => void>((item) => {
@@ -47,23 +59,14 @@ export const AddSpending: FC<AddSpendingProps> = () => {
     } else {
       spending.current.unset("category");
     }
-    validate();
+    validateEntity(spending.current, setOkEnabled);
   }, []);
 
-  function validate() {
-    const isValid = spending.current.isValid();
-
-    console.log("isValid", isValid, okEnabled);
-
-    if (isValid && !okEnabled) {
-      setEnabled(isValid);
-    }
-  }
-
   const handleSave = useCallback(async () => {
+    setLoading(true);
     try {
       await spending.current.save();
-      setVisible(false);
+      setLocalVisible(false);
       spending.current = new Spending();
     } catch (error) {
       console.error(error);
@@ -80,41 +83,47 @@ export const AddSpending: FC<AddSpendingProps> = () => {
       >
         {addSpendingTitile}
       </button>
-      <SlideModal
-        title={addSpendingTitile}
-        visible={visible}
-        okEnabled={okEnabled}
-        onClose={setVisible}
-        onOk={handleSave}
-      >
-        <div className="flex flex-col">
-          <FormInput
-            name="amount"
-            label={t("amount")}
-            type="number"
-            placeholder={t("inputAmount")}
-            onChange={inputHandler}
-          />
-          <FormInput name="date" label={t("date")} type="date" onChange={inputHandler} />
-          <Select
-            label={t("category")}
-            items={categories}
-            renderFn={({ item }) => {
-              return <CategoryListItem item={item} />;
-            }}
-            onChange={categoryHandler}
-          >
-            {renderSelectBox}
-          </Select>
-          <FormInput
-            name="comment"
-            label={t("comment")}
-            type="text"
-            placeholder={t("inputComment")}
-            onChange={inputHandler}
-          />
-        </div>
-      </SlideModal>
+      {visible && (
+        <SlideModal
+          title={addSpendingTitile}
+          visible={localVisible}
+          okEnabled={okEnabled}
+          onClose={setLocalVisible}
+          onOk={handleSave}
+          isLoading={isLoading}
+          afterLeave={afterLeave}
+        >
+          <div className="flex flex-col divide-y divide-gray-500/30">
+            <FormInput
+              name="amount"
+              label={t("amount")}
+              type="number"
+              placeholder={t("inputAmount")}
+              onChange={inputHandler}
+              className="text-right"
+            />
+            <FormInput name="date" label={t("date")} type="date" onChange={inputHandler} />
+            <Select
+              label={t("category")}
+              items={categories}
+              renderFn={({ item }) => {
+                return <CategoryListItem item={item} />;
+              }}
+              onChange={categoryHandler}
+            >
+              {renderSelectBox}
+            </Select>
+            <FormInput
+              name="comment"
+              label={t("comment")}
+              type="text"
+              placeholder={t("inputComment")}
+              onChange={inputHandler}
+              className="text-right"
+            />
+          </div>
+        </SlideModal>
+      )}
     </>
   );
 };
