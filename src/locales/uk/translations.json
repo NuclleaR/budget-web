@@ -23,5 +23,11 @@
   "expenseItems": "Витрати",
   "totalAmount": "Загальна сума",
   "currency": "Валюта",
+  "budgetCreated": "Бюджет створено",
+  "budgetUpdated": "Бюджет оновлено",
+  "budgetDeleted": "Бюджет видалено",
+  "spendingCreated": "Витрата додана",
+  "spendingUpdated": "Витрата оновлена",
+  "spendingDeleted": "Витрата видалена",
   "settings": "Налаштування"
 }

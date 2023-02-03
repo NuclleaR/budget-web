@@ -4,6 +4,7 @@ import { useModalVisible } from "@/hooks/useModalVisible";
 import { Category } from "@/models/Category";
 import { Spending } from "@/models/Spending";
 import { useCategoriesStore } from "@/stores";
+import { useToastStore } from "@/stores/toastStore";
 import { t } from "@/utils/translation";
 import { validateEntity } from "@/utils/validators";
 import { ChangeEvent, FC, useCallback, useRef, useState } from "react";
@@ -17,6 +18,7 @@ const addSpendingTitile = t("addSpending");
 
 export const AddSpending: FC<AddSpendingProps> = () => {
   const categories = useCategoriesStore((state) => state.items);
+  const setToast = useToastStore((state) => state.setToast);
 
   const spending = useRef(new Spending());
 
@@ -68,8 +70,9 @@ export const AddSpending: FC<AddSpendingProps> = () => {
       await spending.current.save();
       setLocalVisible(false);
       spending.current = new Spending();
+      setToast(t("spendingAdded"));
     } catch (error) {
-      console.error(error);
+      setToast((error as Error).message);
     }
   }, [spending]);
 

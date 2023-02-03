@@ -23,5 +23,11 @@
   "expenseItems": "Expense items",
   "totalAmount": "Total amount",
   "currency": "Сurrency",
+  "budgetCreated": "Budget created",
+  "budgetUpdated": "Budget updated",
+  "budgetDeleted": "Budget deleted",
+  "spendingAdded": "Spending added",
+  "spendingUpdated": "Spending updated",
+  "spendingDeleted": "Spending deleted",
   "settings": "Settings"
 }

@@ -4,6 +4,7 @@ import { SlideModal } from "@/components/SlideModal";
 import { useModalVisible } from "@/hooks/useModalVisible";
 import { Budget } from "@/models/Budget";
 import { useParentCategoriesStore } from "@/stores";
+import { useToastStore } from "@/stores/toastStore";
 import { cn } from "@/utils/classNames";
 import { currencies, Currency, CurrencyType } from "@/utils/currency";
 import { t } from "@/utils/translation";
@@ -18,6 +19,7 @@ export type BudgetCrudProps = {
 };
 
 export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, setVisible }) => {
+  const setToast = useToastStore((state) => state.setToast);
   const { parentCategories, fetchItems } = useParentCategoriesStore(
     (state) => ({ parentCategories: state.items, fetchItems: state.fetchItems }),
     shallow,
@@ -87,8 +89,9 @@ export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, s
       await budget.current.save();
       setLocalVisible(false);
       budget.current = new Budget({ currency: Currency.UAH });
+      setToast(t("budgetCreated"));
     } catch (error) {
-      console.error(error);
+      setToast((error as Error).message);
     }
   }, []);
 

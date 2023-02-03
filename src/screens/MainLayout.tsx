@@ -1,11 +1,13 @@
 import { BottomNavBar } from "@/components/BottomNavBar";
 import { unicodeMap } from "@/components/FontAwesomeIcons";
+import { Toast } from "@/components/Toast";
 import { t } from "@/utils/translation";
 import { Link, Outlet } from "@tanstack/react-router";
 import { FC } from "react";
 
 export const MainLayout: FC = () => (
   <>
+    <Toast />
     <Outlet />
     <BottomNavBar>
       <Link className="flex flex-1 flex-col items-center" to="/">
