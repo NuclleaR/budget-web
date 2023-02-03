@@ -3,13 +3,13 @@ import Parse from "parse/dist/parse.min.js";
 import { create } from "zustand";
 import { listSlice, ListState } from "./listStore";
 
-export const useParentCategoriesStore = create<ListState<ParentCategory>>()((
+export const useParentCategoriesStore = create<ListState<ParentCategory>>((
   set,
   get,
 ) => ({
   ...listSlice(
     set,
     get,
-    new Parse.Query<ParentCategory>("ParentCategory"),
+    new Parse.Query(ParentCategory),
   ),
 }));

@@ -27,4 +27,4 @@ export class Category extends Object<CategoryAttributes> {
   }
 }
 
-Parse.Object.registerSubclass("Categories", Category);
+Object.registerSubclass("Categories", Category);

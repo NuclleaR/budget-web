@@ -15,4 +15,4 @@ export class ParentCategory extends Object<ParentCategoryAttributes> {
   }
 }
 
-Parse.Object.registerSubclass("ParentCategory", ParentCategory);
+Object.registerSubclass("ParentCategory", ParentCategory);

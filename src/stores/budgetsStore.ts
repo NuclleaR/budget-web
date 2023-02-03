@@ -14,7 +14,7 @@ export const useBudgetsStore = create<BudgetStore & ListState<Budget>>()((
   const slice = listSlice(
     set,
     get,
-    new Query<Budget>("Budget").descending("date"),
+    new Query(Budget).descending("date"),
   );
   return ({
     currentBudget: null,

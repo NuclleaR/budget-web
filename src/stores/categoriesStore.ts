@@ -10,6 +10,6 @@ export const useCategoriesStore = create<ListState<Category>>((
   ...listSlice(
     set,
     get,
-    new Parse.Query<Category>("Categories").notEqualTo("deleted", true),
+    new Parse.Query(Category).notEqualTo("deleted", true),
   ),
 }));
