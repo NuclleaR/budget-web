@@ -1,15 +1,11 @@
 import { BudgetCard } from "@/screens/Main/components/BudgetCard";
 import { getAllData } from "@/stores";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { ListHeader } from "./components/ListHeader";
 import { SpendingList } from "./components/SpendingList";
 
 export const Main: FC = () => {
   console.log("Main render");
-
-  useEffect(() => {
-    getAllData();
-  }, []);
 
   return (
     <div className="relative h-full w-full bg-gradient-to-br from-violet-500 to-fuchsia-500 pt-4">

@@ -3,7 +3,7 @@ import { ListLoader } from "@/components/ListLoader";
 import { VirtualList } from "@/components/VirtualList";
 import { useBudgetsStore } from "@/stores";
 import { t } from "@/utils/translation";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { shallow } from "zustand/shallow";
 import { BudgetCrud } from "./components/BudgetCrud";
 import { BudgetListItem } from "./components/BudgetItem";
@@ -13,7 +13,7 @@ const estimateSize = () => 65;
 export const Budgets: FC = () => {
   const [visible, setVisible] = useState(false);
 
-  const { budgets, isLoading, fetchBudgets } = useBudgetsStore(
+  const { budgets, isLoading } = useBudgetsStore(
     (store) => ({
       budgets: store.items,
       isLoading: store.isLoading,
@@ -21,10 +21,6 @@ export const Budgets: FC = () => {
     }),
     shallow,
   );
-
-  useEffect(() => {
-    fetchBudgets();
-  }, []);
 
   return (
     <>
