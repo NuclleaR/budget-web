@@ -8,11 +8,12 @@ export interface ListState<T extends Parse.Object<Parse.Attributes>> {
   isLive: boolean;
   error: Error | Parse.Error | null;
   query: Parse.Query<T> | null | undefined;
-  fetchItems: (enableLiveQuery?: boolean) => Promise<void>;
-  setQuery: (query: Parse.Query<T>) => void;
-  handleCreate: (object: T) => void;
-  handleUpdate: (object: T) => void;
-  handleDelete: (object: T) => void;
+  fetchItems(
+    enableLiveQuery?: boolean,
+  ): Promise<Parse.LiveQuerySubscription | undefined>;
+  setQuery(query: Parse.Query<T>): void;
+  handleUpdate(object: T): void;
+  handleDelete(object: T): void;
 }
 
 export function listSlice<T extends Parse.Object<Parse.Attributes>>(
@@ -62,6 +63,8 @@ export function listSlice<T extends Parse.Object<Parse.Attributes>>(
         subscription.on("create", (object) => get().handleCreate(object as T));
         subscription.on("update", (object) => get().handleUpdate(object as T));
         subscription.on("delete", (object) => get().handleDelete(object as T));
+
+        return subscription;
       }
     },
     setQuery: (query) => {

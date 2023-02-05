@@ -1,7 +1,7 @@
 import { Route } from "@tanstack/react-router";
 import { layoutRoute, navbarLayoutRoute } from "..";
-import { PersonalAccount } from "./Account/PersonalAccount";
-import { PersonalAccounts } from "./PersonalAccouts";
+import PersonalAccount from "./Account/PersonalAccount";
+import PersonalAccounts from "./PersonalAccouts";
 
 export const personalAccountsRoute = new Route({
   getParentRoute: () => layoutRoute,

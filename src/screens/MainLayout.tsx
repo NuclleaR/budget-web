@@ -1,5 +1,6 @@
 import { BottomNavBar } from "@/components/BottomNavBar";
-import { unicodeMap } from "@/components/FontAwesomeIcons";
+import { FontAwesome } from "@/components/FontAwesomeIcons";
+import { Solid } from "@/components/icon";
 import { Toast } from "@/components/Toast";
 import { t } from "@/utils/translation";
 import { Link, Outlet } from "@tanstack/react-router";
@@ -12,19 +13,19 @@ export const MainLayout: FC = () => {
       <Outlet />
       <BottomNavBar>
         <Link className="flex flex-col items-center" to="/">
-          <span className="Solid">{unicodeMap["wallet"]}</span>
+          <Solid name={FontAwesome.wallet} />
           <Label>Home</Label>
         </Link>
         <Link className="flex flex-col items-center" to="/budgets">
-          <span className="Solid">{unicodeMap["hryvniaSign"]}</span>
+          <Solid name={FontAwesome.hryvniaSign} />
           <Label>{t("budgets")}</Label>
         </Link>
         <Link className="flex flex-col items-center" to="/accounts">
-          <span className="Solid">{unicodeMap["peopleGroup"]}</span>
+          <Solid name={FontAwesome.peopleGroup} />
           <Label>{t("personalAccounts")}</Label>
         </Link>
         <Link className="flex flex-col items-center" to="/settings">
-          <span className="Solid">{unicodeMap["gear"]}</span>
+          <Solid name={FontAwesome.gear} />
           <Label>{t("settings")}</Label>
         </Link>
       </BottomNavBar>

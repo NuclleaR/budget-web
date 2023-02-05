@@ -1,3 +1,4 @@
+import { CurrencyType } from "@/utils/currency";
 import { Object } from "parse/dist/parse.min.js";
 
 export type PersonalAccountAttributes = {
@@ -6,6 +7,7 @@ export type PersonalAccountAttributes = {
   amount: number;
   amountUsd: number;
   amountEur: number;
+  currency: CurrencyType;
 };
 
 export class PersonalAccount extends Object<PersonalAccountAttributes> {

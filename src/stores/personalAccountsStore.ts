@@ -6,10 +6,12 @@ import { listSlice, ListState } from "./listStore";
 export const usePersonalAccountStore = create<ListState<PersonalAccount>>((
   set,
   get,
-) => ({
-  ...listSlice(
+) => {
+  const slice = listSlice(
     set,
     get,
     new Parse.Query(PersonalAccount),
-  ),
-}));
+  );
+
+  return slice;
+});

@@ -1,8 +1,9 @@
 import { ListHeader } from "@/components/ListHeader";
 import { ListLoader } from "@/components/ListLoader";
+import { useNavbar } from "@/stores/navbarStore";
 import { usePersonalAccountStore } from "@/stores/personalAccountsStore";
 import { t } from "@/utils/translation";
-import { FC } from "react";
+import { FC, memo, MouseEventHandler, useCallback } from "react";
 import { shallow } from "zustand/shallow";
 import { AccountListItem } from "./components/AccauntListItem";
 
@@ -16,6 +17,12 @@ export const PersonalAccounts: FC = () => {
     shallow,
   );
 
+  const setTitle = useNavbar((state) => state.setTitle);
+
+  const handleClick = useCallback<MouseEventHandler<HTMLAnchorElement>>((event) => {
+    setTitle(event.currentTarget.dataset.title);
+  }, []);
+
   return (
     <>
       <div className="flex h-full w-full flex-col bg-gradient-to-tr from-blue-500 to-teal-600">
@@ -26,7 +33,7 @@ export const PersonalAccounts: FC = () => {
           ) : (
             <div className="divide-y divide-gray-500/30">
               {accounts.map((account) => (
-                <AccountListItem key={account.id} account={account} />
+                <AccountListItem key={account.id} account={account} onClick={handleClick} />
               ))}
             </div>
           )}
@@ -35,3 +42,5 @@ export const PersonalAccounts: FC = () => {
     </>
   );
 };
+
+export default memo(PersonalAccounts);
