@@ -36,17 +36,17 @@ export const PersonalAccount: FC = () => {
     let subscription: Parse.LiveQuerySubscription | undefined;
     if (account != null) {
       fetchItems(account).then((sub) => {
-        subscription = sub;
+        if (sub != null) {
+          subscription = sub;
+        }
       });
     }
 
     return () => {
       subscription?.unsubscribe();
-      console.log("unsubscribe", subscription);
+      subscription = undefined;
     };
   }, [account?.id]);
-
-  console.log(isLoading, error, items);
 
   if (account == null) {
     return (

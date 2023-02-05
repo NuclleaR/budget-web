@@ -12,7 +12,7 @@ const schema = z.object({
 
 type LoginData = z.infer<typeof schema>;
 
-export const LoginForm: FC<{
+export const SignInForm: FC<{
   changeState: (state: boolean) => void;
 }> = ({ changeState }) => {
   const login = useUserStore((state) => state.login);

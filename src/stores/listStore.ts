@@ -10,8 +10,9 @@ export interface ListState<T extends Parse.Object<Parse.Attributes>> {
   query: Parse.Query<T> | null | undefined;
   fetchItems(
     enableLiveQuery?: boolean,
-  ): Promise<Parse.LiveQuerySubscription | undefined>;
+  ): Promise<Parse.LiveQuerySubscription | void>;
   setQuery(query: Parse.Query<T>): void;
+  handleCreate(object: T): void;
   handleUpdate(object: T): void;
   handleDelete(object: T): void;
 }
