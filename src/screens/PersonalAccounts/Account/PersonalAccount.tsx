@@ -9,6 +9,11 @@ import { useParams } from "@tanstack/react-router";
 import Parse from "parse/dist/parse.min.js";
 import { FC, memo, useEffect } from "react";
 import { shallow } from "zustand/shallow";
+import { PersonalSpendingItem } from "./components/PersonalSpendingItem";
+
+function estimateSize() {
+  return 40;
+}
 
 export const PersonalAccount: FC = () => {
   const { id } = useParams();
@@ -70,10 +75,10 @@ export const PersonalAccount: FC = () => {
         {isLoading ? (
           <ListLoader />
         ) : (
-          <VirtualList count={items.length} estimateSize={() => 56}>
+          <VirtualList count={items.length} estimateSize={estimateSize}>
             {(virtualRow) => {
               const ps = items.at(virtualRow.index);
-              return ps != null ? <div key={ps.id}>{ps.get("comment")}</div> : null;
+              return ps != null ? <PersonalSpendingItem key={ps.id} spending={ps} /> : null;
             }}
           </VirtualList>
         )}

@@ -26,7 +26,7 @@ export const usePersonalSpendingsStore = create<PersonalSpendingsStore>((
       const query = new Parse.Query(PersonalSpending).equalTo(
         "account",
         account,
-      );
+      ).descending("createdAt");
       slice.setQuery(query);
       return slice.fetchItems();
     },
