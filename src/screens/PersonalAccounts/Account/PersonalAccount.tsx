@@ -83,13 +83,13 @@ export const PersonalAccount: FC = () => {
           </button>
         }
       />
-      <div className="flex h-page flex-col">
+      <div className="flex h-page flex-col overflow-hidden">
         <div className="p-4">
           <Money amount={account.get("amount")} currency={account.get("currency")} />
           {amountUsd != null && <Money amount={amountUsd} currency={Currency.USD} />}
           {amountEur != null && <Money amount={amountEur} currency={Currency.EUR} />}
         </div>
-        <div className="flex-1">
+        <div className="flex-1 overflow-hidden">
           {isLoading ? (
             <ListLoader />
           ) : (

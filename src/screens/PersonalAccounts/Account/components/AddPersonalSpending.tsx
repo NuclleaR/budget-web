@@ -51,6 +51,10 @@ export const AddPersonalSpending: FC<AddPersonalSpendingProps> = ({
       await personalSpending.current.save();
       setLoading(false);
       setLocalVisible(false);
+      personalSpending.current = new PersonalSpending({
+        currency: account.get("currency"),
+        account,
+      });
     } catch (error) {
       setToast((error as Error).message);
     }

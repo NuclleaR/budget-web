@@ -10,25 +10,27 @@ export const MainLayout: FC = () => {
   return (
     <>
       <Toast />
-      <Outlet />
-      <BottomNavBar>
-        <Link className="flex flex-col items-center" to="/">
-          <Solid name={FontAwesome.wallet} />
-          <Label>Home</Label>
-        </Link>
-        <Link className="flex flex-col items-center" to="/budgets">
-          <Solid name={FontAwesome.hryvniaSign} />
-          <Label>{t("budgets")}</Label>
-        </Link>
-        <Link className="flex flex-col items-center" to="/accounts">
-          <Solid name={FontAwesome.peopleGroup} />
-          <Label>{t("personalAccounts")}</Label>
-        </Link>
-        <Link className="flex flex-col items-center" to="/settings">
-          <Solid name={FontAwesome.gear} />
-          <Label>{t("settings")}</Label>
-        </Link>
-      </BottomNavBar>
+      <div className="h-full pb-[58px]">
+        <Outlet />
+        <BottomNavBar>
+          <Link className="flex flex-col items-center" to="/">
+            <Solid name={FontAwesome.wallet} />
+            <Label>Home</Label>
+          </Link>
+          <Link className="flex flex-col items-center" to="/budgets">
+            <Solid name={FontAwesome.hryvniaSign} />
+            <Label>{t("budgets")}</Label>
+          </Link>
+          <Link className="flex flex-col items-center" to="/accounts">
+            <Solid name={FontAwesome.peopleGroup} />
+            <Label>{t("personalAccounts")}</Label>
+          </Link>
+          <Link className="flex flex-col items-center" to="/settings">
+            <Solid name={FontAwesome.gear} />
+            <Label>{t("settings")}</Label>
+          </Link>
+        </BottomNavBar>
+      </div>
     </>
   );
 };
