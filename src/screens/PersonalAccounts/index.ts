@@ -1,5 +1,5 @@
 import { Route } from "@tanstack/react-router";
-import { layoutRoute, navbarLayoutRoute } from "..";
+import { layoutRoute, simpleLayoutRoute } from "..";
 import PersonalAccount from "./Account/PersonalAccount";
 import PersonalAccounts from "./PersonalAccouts";
 
@@ -10,7 +10,7 @@ export const personalAccountsRoute = new Route({
 });
 
 export const personalAccountRoute = new Route({
-  getParentRoute: () => navbarLayoutRoute,
+  getParentRoute: () => simpleLayoutRoute,
   path: "/account/$id",
   component: PersonalAccount,
 });

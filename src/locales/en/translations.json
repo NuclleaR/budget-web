@@ -30,5 +30,6 @@
   "spendingUpdated": "Spending updated",
   "spendingDeleted": "Spending deleted",
   "personalAccounts": "Personal accounts",
+  "addPersonalSpending": "Add personal spending",
   "settings": "Settings"
 }

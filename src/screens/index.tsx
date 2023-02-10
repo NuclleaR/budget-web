@@ -1,6 +1,6 @@
 import { Route } from "@tanstack/react-router";
 import { MainLayout } from "./MainLayout";
-import { NavbarLayout } from "./NavbarLayout";
+import { SimpleLayout } from "./SimpleLayout";
 import { rootRoute } from "./__root";
 
 export const layoutRoute = new Route({
@@ -9,8 +9,8 @@ export const layoutRoute = new Route({
   component: MainLayout,
 });
 
-export const navbarLayoutRoute = new Route({
+export const simpleLayoutRoute = new Route({
   getParentRoute: () => rootRoute,
   id: "toolbarlayout",
-  component: NavbarLayout,
+  component: SimpleLayout,
 });

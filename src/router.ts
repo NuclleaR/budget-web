@@ -1,6 +1,6 @@
 import { ReactRouter } from "@tanstack/react-router";
 import { DefaultPendingComponent } from "./components/DefaultPendingComponent";
-import { layoutRoute, navbarLayoutRoute } from "./screens";
+import { layoutRoute, simpleLayoutRoute } from "./screens";
 import { Component404 } from "./screens/404";
 import { budgetsRoute } from "./screens/Budgets";
 import { mainRoute } from "./screens/Main";
@@ -18,7 +18,7 @@ const routeTree = rootRoute.addChildren([
     settingsRoute,
     personalAccountsRoute,
   ]),
-  navbarLayoutRoute.addChildren([personalAccountRoute]),
+  simpleLayoutRoute.addChildren([personalAccountRoute]),
 ]);
 
 export const router = new ReactRouter({

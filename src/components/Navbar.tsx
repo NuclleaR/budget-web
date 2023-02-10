@@ -1,18 +1,17 @@
-import { useNavbar } from "@/stores/navbarStore";
 import { t } from "@/utils/translation";
 import { FC, useLayoutEffect, useRef } from "react";
-import { shallow } from "zustand/shallow";
 import { FontAwesome } from "./FontAwesomeIcons";
 import { Solid } from "./icon";
 
-export const Navbar: FC = () => {
+type NavbarProps = {
+  trailing?: React.ReactNode;
+  title: string;
+  hasBack?: boolean;
+};
+
+export const Navbar: FC<NavbarProps> = ({ trailing, title, hasBack }) => {
   const backRef = useRef<HTMLButtonElement | null>(null);
   const titleRef = useRef<HTMLSpanElement | null>(null);
-
-  const { title, hasBack } = useNavbar(
-    (state) => ({ title: state.title, hasBack: state.hasBack }),
-    shallow,
-  );
 
   useLayoutEffect(() => {
     if (backRef.current && titleRef.current) {
@@ -43,6 +42,7 @@ export const Navbar: FC = () => {
       <span ref={titleRef} className="truncate text-xl font-semibold">
         {title}
       </span>
+      {trailing}
     </div>
   );
 };

@@ -11,7 +11,12 @@ export type PersonalSpendingAttributes = {
 
 export class PersonalSpending extends Object<PersonalSpendingAttributes> {
   constructor(attributes?: Partial<PersonalSpendingAttributes>) {
-    super("PersonalAccount", attributes as PersonalSpendingAttributes);
+    super("PersonalSpending", attributes as PersonalSpendingAttributes);
+  }
+
+  isValid(): boolean {
+    return this.get("comment") !== "" && this.get("amount") > 0 &&
+      this.get("account") !== undefined;
   }
 }
 

@@ -103,6 +103,7 @@ export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, s
       onClose={setLocalVisible}
       onOk={handleSave}
       afterLeave={afterLeave}
+      isLoading={isLoading}
     >
       <div className="flex flex-col">
         <FormInput name="date" label={t("date")} type="month" onChange={inputHandler} />
