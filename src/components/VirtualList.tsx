@@ -15,7 +15,7 @@ export const VirtualList: FC<VirtualListProps> = ({ count, estimateSize, oversca
   return (
     <div className="h-full overflow-y-auto" ref={listRef}>
       <div
-        className="w-full, relative divide-y divide-gray-500/30"
+        className="relative w-full"
         style={{
           height: `${virtualizer.getTotalSize()}px`,
         }}

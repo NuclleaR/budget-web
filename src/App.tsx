@@ -1,8 +1,14 @@
+import { setupIonicReact } from "@ionic/react";
 import { RouterProvider } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { router } from "./router";
 import { Component404 } from "./screens/404";
 import { useUserStore } from "./stores/userStore";
+// Styles
+import "@ionic/react/css/core.css";
+import "./theme/theme.css";
+
+setupIonicReact();
 
 function App() {
   const [isInitUser, setIsInitUser] = useState(false);

@@ -1,6 +1,8 @@
 {
   "ok": "Ok",
   "cancel": "Cancel",
+  "edit": "Edit",
+  "delete": "Delete",
   "addSpending": "Add spending",
   "budgets": "Budgets",
   "amount": "Amount",

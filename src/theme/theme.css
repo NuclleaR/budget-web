@@ -1,0 +1,10 @@
+.ios ion-item {
+  --background: inherit;
+  --color: inherit;
+  --min-height: 68px;
+  --ion-text-color-rgb: 0 0 0;
+}
+
+.simple .sc-ion-label-ios-s h2 {
+  @apply font-semibold text-lg;
+}
