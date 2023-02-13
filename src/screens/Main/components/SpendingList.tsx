@@ -7,7 +7,7 @@ import { shallow } from "zustand/shallow";
 
 export type SpendingListProps = {};
 
-const estimateSize = () => 68;
+const estimateSize = () => 70;
 
 export const SpendingList: FC<SpendingListProps> = () => {
   const { spendings, isLoading } = useSpendingsStore(

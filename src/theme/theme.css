@@ -1,8 +1,9 @@
 .ios ion-item {
   --background: inherit;
   --color: inherit;
-  --min-height: 68px;
+  --min-height: 70px;
   --ion-text-color-rgb: 0 0 0;
+  --border-color: theme(colors.gray.500/0.5);
 }
 
 .simple .sc-ion-label-ios-s h2 {
