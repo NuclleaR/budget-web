@@ -96,7 +96,14 @@ export const PersonalAccount: FC = () => {
             <VirtualList count={items.length} estimateSize={estimateSize}>
               {(virtualRow) => {
                 const ps = items.at(virtualRow.index);
-                return ps != null ? <PersonalSpendingItem key={ps.id} spending={ps} /> : null;
+                return ps != null ? (
+                  <PersonalSpendingItem
+                    key={ps.id}
+                    spending={ps}
+                    size={virtualRow.size}
+                    position={virtualRow.start}
+                  />
+                ) : null;
               }}
             </VirtualList>
           )}

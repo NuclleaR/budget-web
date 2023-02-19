@@ -144,6 +144,7 @@ export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, s
           onChange={(value) => {
             setCurrency(value);
             budget.current.set("currency", value);
+            validate();
           }}
         >
           <RadioGroup.Label className="mb-3 block font-semibold">{t("currency")}:</RadioGroup.Label>

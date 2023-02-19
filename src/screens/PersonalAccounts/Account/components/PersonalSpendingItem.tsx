@@ -4,11 +4,28 @@ import { FC } from "react";
 
 type PersonalSpendingItemProps = {
   spending: PersonalSpending;
+  position?: number;
+  size?: number;
 };
 
-export const PersonalSpendingItem: FC<PersonalSpendingItemProps> = ({ spending }) => {
+export const PersonalSpendingItem: FC<PersonalSpendingItemProps> = ({
+  spending,
+  size,
+  position,
+}) => {
   return (
-    <div className="flex justify-between px-4 py-2">
+    <div
+      className="inset-0 flex justify-between px-4 py-2"
+      style={
+        position != null
+          ? {
+              transform: `translateY(${position}px)`,
+              position: "absolute",
+              height: size ?? "auto",
+            }
+          : undefined
+      }
+    >
       <div>{spending.get("comment")}</div>
       <Money amount={spending.get("amount")} currency={spending.get("currency")} />
     </div>
