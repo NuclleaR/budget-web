@@ -7,20 +7,23 @@ import { useCategoriesStore } from "@/stores";
 import { useToastStore } from "@/stores/toastStore";
 import { t } from "@/utils/translation";
 import { validateEntity } from "@/utils/validators";
-import { ChangeEvent, FC, useCallback, useRef, useState } from "react";
+import { ChangeEvent, FC, useCallback, useEffect, useRef, useState } from "react";
 import { SlideModal } from "../../../components/SlideModal";
 import { CategoryListItem } from "./CategoryListItem";
 // import Parse from "parse/dist/parse.min.js";
 
-export type AddSpendingProps = {};
+export type AddSpendingProps = {
+  item?: Spending;
+  onClose?(): void;
+};
 
 const addSpendingTitile = t("addSpending");
 
-export const AddSpending: FC<AddSpendingProps> = () => {
+export const AddSpending: FC<AddSpendingProps> = ({ item, onClose }) => {
   const categories = useCategoriesStore((state) => state.items);
   const setToast = useToastStore((state) => state.setToast);
 
-  const spending = useRef(new Spending());
+  const spending = useRef(item ?? new Spending());
 
   const [visible, setVisible] = useState(false);
   const {
@@ -33,6 +36,20 @@ export const AddSpending: FC<AddSpendingProps> = () => {
     setOkEnabled,
   } = useModalVisible(visible, setVisible);
 
+  useEffect(() => {
+    if (onClose && !visible) {
+      spending.current = new Spending();
+      onClose();
+    }
+  }, [visible, onClose]);
+
+  useEffect(() => {
+    if (item != null) {
+      spending.current = item;
+      setVisible(true);
+    }
+  }, [item]);
+
   const inputHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     switch (name) {
@@ -44,6 +61,7 @@ export const AddSpending: FC<AddSpendingProps> = () => {
         spending.current.set("amount", parseFloat(value));
         break;
       case "date":
+        console.log("date", value);
         spending.current.set("date", new Date(value));
         break;
       case "comment":
@@ -104,8 +122,15 @@ export const AddSpending: FC<AddSpendingProps> = () => {
               placeholder={t("inputAmount")}
               onChange={inputHandler}
               className="text-right"
+              defaultValue={spending.current.get("amount")}
             />
-            <FormInput name="date" label={t("date")} type="date" onChange={inputHandler} />
+            <FormInput
+              name="date"
+              label={t("date")}
+              type="date"
+              onChange={inputHandler}
+              defaultValue={spending.current.get("date")?.toISOString().substring(0, 10)}
+            />
             <Select
               label={t("category")}
               items={categories}
@@ -113,6 +138,7 @@ export const AddSpending: FC<AddSpendingProps> = () => {
                 return <CategoryListItem item={item} />;
               }}
               onChange={categoryHandler}
+              defaultValue={spending.current.get("category")}
             >
               {renderSelectBox}
             </Select>
@@ -123,6 +149,7 @@ export const AddSpending: FC<AddSpendingProps> = () => {
               placeholder={t("inputComment")}
               onChange={inputHandler}
               className="text-right"
+              defaultValue={spending.current.get("comment")}
             />
           </div>
         </SlideModal>

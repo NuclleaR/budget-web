@@ -22,6 +22,7 @@ export type SelectProps<T> = {
   label?: string;
   onChange?: (value: T | null) => void;
   name?: string;
+  defaultValue: T | undefined | null;
   renderFn?: (props: {
     item: T;
     active: boolean;
@@ -38,8 +39,9 @@ export const Select: <T>(props: SelectProps<T>) => ReactElement = <T,>({
   children,
   onChange,
   name,
+  defaultValue,
 }: SelectProps<T>): ReactElement => {
-  const [selected, setSelected] = useState<T | null>(null);
+  const [selected, setSelected] = useState<T | null>(defaultValue ?? null);
 
   const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
   const [popperElement, setPopperElement] = useState<HTMLUListElement | null>(null);

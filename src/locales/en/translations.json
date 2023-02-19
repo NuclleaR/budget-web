@@ -31,7 +31,10 @@
   "spendingAdded": "Spending added",
   "spendingUpdated": "Spending updated",
   "spendingDeleted": "Spending deleted",
+  "deleteSpending": "Delete spending",
   "personalAccounts": "Personal accounts",
   "addPersonalSpending": "Add personal spending",
-  "settings": "Settings"
+  "settings": "Settings",
+  "dataWillBeLost": "All data will be lost",
+  "errorMessage": "Something went wrong... please try again later"
 }

@@ -31,7 +31,10 @@
   "spendingCreated": "Витрата додана",
   "spendingUpdated": "Витрата оновлена",
   "spendingDeleted": "Витрата видалена",
+  "deleteSpending": "Видалити витрату",
   "personalAccounts": "Особисті рахунки",
   "addPersonalSpending": "Додати особисту витрату",
-  "settings": "Налаштування"
+  "settings": "Налаштування",
+  "dataWillBeLost": "Всі дані будуть втрачені",
+  "errorMessage": "Ой, щось пішло не так... Спробуйте ще раз"
 }
