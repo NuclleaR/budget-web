@@ -28,6 +28,7 @@
   "budgetCreated": "Budget created",
   "budgetUpdated": "Budget updated",
   "budgetDeleted": "Budget deleted",
+  "deleteBudget": "Delete budget",
   "spendingAdded": "Spending added",
   "spendingUpdated": "Spending updated",
   "spendingDeleted": "Spending deleted",

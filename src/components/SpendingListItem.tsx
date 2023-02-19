@@ -9,7 +9,6 @@ import {
   IonLabel,
   useIonActionSheet,
 } from "@ionic/react";
-import { OverlayEventDetail } from "@ionic/react/dist/types/components/react-component-lib/interfaces";
 import { FC, MouseEvent, useRef } from "react";
 import { MemoizedCategoryIcon } from "./CategoryIcon";
 import { FontAwesome } from "./FontAwesomeIcons";
@@ -69,7 +68,7 @@ export const SpendingListItem: FC<SpendingListItemProps> = ({
       onWillPresent: () => {
         slidingRef.current?.close();
       },
-      onDidDismiss: (data: CustomEvent<OverlayEventDetail<ActonType>>) => {
+      onDidDismiss: (data) => {
         if (data.detail.role === "destructive") {
           onDelete?.(spending, event);
         }

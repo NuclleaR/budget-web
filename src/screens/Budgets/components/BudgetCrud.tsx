@@ -36,8 +36,12 @@ export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, s
     setLoading,
   } = useModalVisible(visible, setVisible);
 
-  const [total, setTotal] = useState(0);
-  const [currency, setCurrency] = useState<CurrencyType>(Currency.UAH);
+  const [total, setTotal] = useState(
+    initBudget != null ? getTotalAmount(initBudget.get("budgetPlan")) : 0,
+  );
+  const [currency, setCurrency] = useState<CurrencyType>(
+    initBudget?.get("currency") ?? Currency.UAH,
+  );
 
   useEffect(() => {
     if (parentCategories.length == 0) {
@@ -56,7 +60,7 @@ export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, s
         budget.current.set("amount", parseInt(value, 10));
         break;
       case "date":
-        console.log(new Date(value));
+        console.log(value);
         budget.current.set("date", new Date(value));
         break;
       case "budgetPlan":
@@ -89,7 +93,7 @@ export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, s
       await budget.current.save();
       setLocalVisible(false);
       budget.current = new Budget({ currency: Currency.UAH });
-      setToast(t("budgetCreated"));
+      setToast(t(initBudget != null ? "budgetUpdated" : "budgetCreated"));
     } catch (error) {
       setToast((error as Error).message);
     }
@@ -106,7 +110,13 @@ export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, s
       isLoading={isLoading}
     >
       <div className="flex flex-col">
-        <FormInput name="date" label={t("date")} type="month" onChange={inputHandler} />
+        <FormInput
+          name="date"
+          label={t("date")}
+          type="month"
+          onChange={inputHandler}
+          defaultValue={budget.current.get("date")?.toISOString().substring(0, 7)}
+        />
         <br />
         <div className="font-semibold">{t("expenseItems")}:</div>
         <div className="divide-y divide-gray-500/30">
@@ -119,6 +129,7 @@ export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, s
               type="number"
               onChange={inputHandler}
               placeholder={t("inputAmount")}
+              defaultValue={budget.current.get("budgetPlan")?.[parentCategory.id]}
             />
           ))}
         </div>
@@ -161,6 +172,8 @@ export const BudgetCrud: FC<BudgetCrudProps> = ({ budget: initBudget, visible, s
   );
 };
 
-function getTotalAmount(data: Record<string, number> = {}) {
-  return Object.values(data).reduce((acc, cur) => acc + cur, 0);
+function getTotalAmount(data: Partial<Record<string, number>> = {}) {
+  return Object.values(data).reduce((acc: number, cur) => {
+    return acc + (cur ?? 0);
+  }, 0);
 }

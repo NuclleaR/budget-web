@@ -6,6 +6,6 @@
   --border-color: theme(colors.gray.500/0.5);
 }
 
-.simple .sc-ion-label-ios-s h2 {
-  @apply font-semibold text-lg;
+.budget-item .sc-ion-label-ios-s h1 {
+  @apply capitalize;
 }

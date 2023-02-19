@@ -1,17 +1,21 @@
 import { ListHeader } from "@/components/ListHeader";
 import { ListLoader } from "@/components/ListLoader";
 import { VirtualList } from "@/components/VirtualList";
+import { Budget } from "@/models/Budget";
 import { useBudgetsStore } from "@/stores";
+import { useToastStore } from "@/stores/toastStore";
 import { t } from "@/utils/translation";
-import { FC, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { shallow } from "zustand/shallow";
 import { BudgetCrud } from "./components/BudgetCrud";
-import { BudgetListItem } from "./components/BudgetItem";
+import { BudgetActiionCalback, BudgetListItem } from "./components/BudgetItem";
 
-const estimateSize = () => 65;
+const estimateSize = () => 75;
 
 export const Budgets: FC = () => {
   const [visible, setVisible] = useState(false);
+  const setToast = useToastStore((state) => state.setToast);
+  const [budget, setBudget] = useState<Budget | undefined>(undefined);
 
   const { budgets, isLoading } = useBudgetsStore(
     (store) => ({
@@ -21,6 +25,27 @@ export const Budgets: FC = () => {
     }),
     shallow,
   );
+
+  useEffect(() => {
+    if (!visible && budget != null) {
+      setBudget(undefined);
+    }
+  }, [visible]);
+
+  const handleDelete = useCallback<BudgetActiionCalback>(async (budget) => {
+    try {
+      await budget.destroy();
+      setToast(t("budgetDeleted"));
+    } catch (error) {
+      console.error("Error while deleting Spending: ", error);
+      setToast(t("errorMessage"));
+    }
+  }, []);
+
+  const handleEdit = useCallback<BudgetActiionCalback>((budget) => {
+    setBudget(budget);
+    setVisible(true);
+  }, []);
 
   return (
     <>
@@ -45,6 +70,8 @@ export const Budgets: FC = () => {
                     budget={budget}
                     position={virtualRow.start}
                     size={virtualRow.size}
+                    onDelete={handleDelete}
+                    onEdit={handleEdit}
                   />
                 ) : null;
               }}
@@ -52,7 +79,7 @@ export const Budgets: FC = () => {
           )}
         </div>
       </div>
-      {visible && <BudgetCrud visible={visible} setVisible={setVisible} />}
+      {visible && <BudgetCrud visible={visible} setVisible={setVisible} budget={budget} />}
     </>
   );
 };
