@@ -37,7 +37,7 @@ export const AddPersonalSpending: FC<AddPersonalSpendingProps> = ({
   const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     switch (event.target.name) {
       case "amount":
-        personalSpending.current.set("amount", parseInt(event.target.value, 10));
+        personalSpending.current.set("amount", parseFloat(event.target.value));
         break;
       case "comment":
         personalSpending.current.set("comment", event.target.value);
