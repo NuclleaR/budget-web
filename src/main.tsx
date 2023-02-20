@@ -9,3 +9,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <App />,
   // </React.StrictMode>,
 );
+
+// window.addEventListener("load", () => {
+//   if ("serviceWorker" in navigator) {
+//     navigator.serviceWorker.register("/sw.js");
+//   }
+// });
